@@ -13,6 +13,7 @@
         <module>warehouse-management-model</module>
         <module>warehouse-management-dao-api</module>
         <module>warehouse-management-dao</module>
+        <module>warehouse-management-web-app</module>
     </modules>
 
     <properties>
@@ -43,6 +44,12 @@
             <dependency>
                 <groupId>com.epam.courses.warehouse</groupId>
                 <artifactId>warehouse-management-dao</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.epam.courses.warehouse</groupId>
+                <artifactId>warehouse-management-web-app</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
