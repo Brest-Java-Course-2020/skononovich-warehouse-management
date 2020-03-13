@@ -11,6 +11,14 @@
         <property name="password" value=""/>
     </bean>
 
+<!--    Only for tests in develop machine. Remove after creating dao tests layer-->
+    <bean id="localTestDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.h2.Driver"/>
+        <property name="url" value="jdbc:h2:tcp://localhost/~/warehouseTest;MODE=MySQL;DB_CLOSE_DELAY=-1"/>
+        <property name="username" value="sa"/>
+        <property name="password" value="sa"/>
+    </bean>
+
     <jdbc:initialize-database>
         <jdbc:script location="classpath*:create-db.sql"/>
         <jdbc:script location="classpath*:data-script.sql"/>
