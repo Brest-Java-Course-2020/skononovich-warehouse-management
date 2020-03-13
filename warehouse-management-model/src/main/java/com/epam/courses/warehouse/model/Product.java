@@ -1,8 +1,8 @@
 package com.epam.courses.warehouse.model;
 
 public class Product {
-    Integer productId;
-    String productTitle;
+    private Integer productId;
+    private String productTitle;
 
     public Integer getProductId() {
         return productId;

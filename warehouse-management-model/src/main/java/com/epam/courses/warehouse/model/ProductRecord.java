@@ -3,11 +3,11 @@ package com.epam.courses.warehouse.model;
 import java.sql.Date;
 
 public class ProductRecord {
-    Integer productRecordId;
-    Integer productId;
-    Integer quantityOfProduct;
-    Date productRecordDate;
-    Byte dealType; //0 - delivery, 1 - receipt
+    private Integer productRecordId;
+    private Integer productId;
+    private Integer quantityOfProduct;
+    private Date productRecordDate;
+    private Byte dealType; //0 - delivery, 1 - receipt
 
     public Integer getProductRecordId() {
         return productRecordId;
