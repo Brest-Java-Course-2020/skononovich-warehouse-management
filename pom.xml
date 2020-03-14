@@ -11,6 +11,7 @@
 
     <modules>
         <module>warehouse-management-model</module>
+        <module>warehouse-management-test-db</module>
         <module>warehouse-management-dao-api</module>
         <module>warehouse-management-dao</module>
         <module>warehouse-management-web-app</module>
@@ -32,6 +33,11 @@
             <dependency>
                 <groupId>com.epam.courses.warehouse</groupId>
                 <artifactId>warehouse-management-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.epam.courses.warehouse</groupId>
+                <artifactId>warehouse-management-test-db</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

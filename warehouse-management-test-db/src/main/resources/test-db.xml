@@ -2,19 +2,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/jdbc
+       http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.h2.Driver"/>
-        <property name="url" value="jdbc:h2:mem:test_db;MODE=MySQL;DB_CLOSE_DELAY=-1"/>
-        <property name="username" value="sa"/>
-        <property name="password" value=""/>
-    </bean>
-
-<!--    Only for tests in develop machine. Remove after creating dao tests layer-->
-    <bean id="localTestDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="org.h2.Driver"/>
-        <property name="url" value="jdbc:h2:tcp://localhost/~/warehouseTest;MODE=MySQL;DB_CLOSE_DELAY=-1"/>
+        <property name="url" value="jdbc:h2:./warehouse_test;MODE=MySQL;DB_CLOSE_DELAY=-1"/>
         <property name="username" value="sa"/>
         <property name="password" value="sa"/>
     </bean>
@@ -23,5 +17,4 @@
         <jdbc:script location="classpath*:create-db.sql"/>
         <jdbc:script location="classpath*:data-script.sql"/>
     </jdbc:initialize-database>
-
 </beans>
