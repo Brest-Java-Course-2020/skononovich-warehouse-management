@@ -3,6 +3,7 @@ package com.epam.courses.warehouse.dao;
 import com.epam.courses.warehouse.model.Product;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProductDAO {
 
@@ -24,7 +25,7 @@ public interface ProductDAO {
      * @param productId product id.
      * @return product.
      */
-    Product getById(Integer productId); // probably don't need
+    Optional<Product> getById(Integer productId); // probably don't need
 
     /**
      * Update product.

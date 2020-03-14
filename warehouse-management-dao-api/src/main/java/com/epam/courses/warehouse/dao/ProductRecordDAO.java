@@ -34,7 +34,4 @@ public interface ProductRecordDAO {
      * @return product count.
      */
     Integer countProductInWarehouse(Product product);
-
-    //TODO: удаление записи о работе с товаром ?
-    // редактирование записи о работе с товаром ?
 }
