@@ -27,8 +27,9 @@ public class Product {
      * Set this product id.
      * @param productId product id.
      */
-    public void setProductId(Integer productId) {
+    public Product setProductId(Integer productId) {
         this.productId = productId;
+        return this;
     }
 
     /**
@@ -43,8 +44,9 @@ public class Product {
      * Set this product name.
      * @param productName product name.
      */
-    public void setProductName(String productName) {
+    public Product setProductName(String productName) {
         this.productName = productName;
+        return this;
     }
 
     /**
