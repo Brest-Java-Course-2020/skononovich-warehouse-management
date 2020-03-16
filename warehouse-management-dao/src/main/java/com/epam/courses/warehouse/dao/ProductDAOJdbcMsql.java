@@ -25,6 +25,18 @@ public class ProductDAOJdbcMsql implements ProductDAO {
     @Value("${product.create}")
     private String sqlCreateProduct;
 
+    @Value("${product.getAll}")
+    private String sqlGetAllProducts;
+
+    @Value("${product.getById}")
+    private String sqlGetProductById;
+
+    @Value("${product.update}")
+    private String sqlUpdateProduct;
+
+    @Value("${product.delete}")
+    private String sqlDeleteProduct;
+
     private NamedParameterJdbcTemplate jdbcTemplate;
     private ProductRowMapper productRowMapper;
 
@@ -40,27 +52,43 @@ public class ProductDAOJdbcMsql implements ProductDAO {
         LOGGER.debug("ProductDAOJdbcMsql:create productName = " + product.getProductName());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("product_name", product.getProductName());
+
         jdbcTemplate.update(sqlCreateProduct, parameterSource, keyHolder);
         return Objects.requireNonNull(keyHolder.getKey()).intValue();
     }
 
     @Override
     public List<Product> getAll() {
-        return null;
+        LOGGER.debug("ProductDAOJdbcMsql:getAll");
+
+        return jdbcTemplate.query(sqlGetAllProducts, productRowMapper);
     }
 
     @Override
     public Optional<Product> getById(Integer productId) {
-        return null;
+        LOGGER.debug("ProductDAOJdbcMsql:getById = " + productId);
+
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource().addValue("product_id", productId);
+
+        return Optional.ofNullable(jdbcTemplate.queryForObject(sqlGetProductById, parameterSource, productRowMapper));
     }
 
     @Override
     public Integer update(Product product) {
-        return null;
+        LOGGER.debug("ProductDAOMsql:Update productId = " + product.getProductId());
+
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource()
+                .addValue("product_id", product.getProductId())
+                .addValue("product_name", product.getProductName());
+
+        return jdbcTemplate.update(sqlUpdateProduct, parameterSource);
     }
 
     @Override
     public Integer delete(Integer productId) {
-        return null;
+        LOGGER.debug("ProductDAOMsql:Delete productId = " + productId);
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource()
+                .addValue("product_id", productId);
+        return jdbcTemplate.update(sqlDeleteProduct, parameterSource);
     }
 }

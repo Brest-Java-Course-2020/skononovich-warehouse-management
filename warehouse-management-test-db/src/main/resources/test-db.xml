@@ -13,6 +13,10 @@
         <property name="password" value="sa"/>
     </bean>
 
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
     <jdbc:initialize-database>
         <jdbc:script location="classpath*:create-db.sql"/>
         <jdbc:script location="classpath*:data-script.sql"/>
