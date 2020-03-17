@@ -42,9 +42,11 @@ public class ProductRecord {
     /**
      * Set the product record id.
      * @param productRecordId product record id.
+     * @return this ProductRecord.
      */
-    public void setProductRecordId(Integer productRecordId) {
+    public ProductRecord setProductRecordId(Integer productRecordId) {
         this.productRecordId = productRecordId;
+        return this;
     }
 
     /**
@@ -58,9 +60,11 @@ public class ProductRecord {
     /**
      * Set the product id.
      * @param productId product id.
+     * @return this ProductRecord.
      */
-    public void setProductId(Integer productId) {
+    public ProductRecord setProductId(Integer productId) {
         this.productId = productId;
+        return this;
     }
 
     /**
@@ -74,9 +78,11 @@ public class ProductRecord {
     /**
      * Set the quantity of product.
      * @param quantityOfProduct quantity of product.
+     * @return this ProductRecord.
      */
-    public void setQuantityOfProduct(Integer quantityOfProduct) {
+    public ProductRecord setQuantityOfProduct(Integer quantityOfProduct) {
         this.quantityOfProduct = quantityOfProduct;
+        return this;
     }
 
     /**
@@ -90,9 +96,11 @@ public class ProductRecord {
     /**
      * Set the product record date.
      * @param productRecordDate product record date.
+     * @return this ProductRecord.
      */
-    public void setProductRecordDate(Date productRecordDate) {
+    public ProductRecord setProductRecordDate(Date productRecordDate) {
         this.productRecordDate = productRecordDate;
+        return this;
     }
 
     /**
@@ -106,9 +114,11 @@ public class ProductRecord {
     /**
      * Set the deal type.
      * @param dealType deal type.
+     * @return this ProductRecord.
      */
-    public void setDealType(DealTypes dealType) {
+    public ProductRecord setDealType(DealTypes dealType) {
         this.dealType = dealType;
+        return this;
     }
 
     /**
