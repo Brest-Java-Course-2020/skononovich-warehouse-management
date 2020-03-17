@@ -30,8 +30,8 @@ public interface ProductRecordDAO {
 
     /**
      * Get product count in warehouse.
-     * @param product product.
+     * @param productId product id.
      * @return product count.
      */
-    Integer countProductInWarehouse(Product product);
+    Integer countProductInWarehouse(Integer productId);
 }
