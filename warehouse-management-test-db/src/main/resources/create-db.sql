@@ -8,11 +8,11 @@ CREATE TABLE product (
 );
 
 CREATE TABLE records (
- product_record_id INT NOT NULL AUTO_INCREMENT,
+ record_id INT NOT NULL AUTO_INCREMENT,
  product_id INT NOT NULL,
- number_of_product INT NOT NULL,
- product_record_date DATE NOT NULL,
+ quantity INT NOT NULL,
+ deal_date DATE NOT NULL,
  deal_type TINYINT NOT NULL,
- PRIMARY KEY(product_record_id),
+ PRIMARY KEY(record_id),
  FOREIGN KEY(product_id) REFERENCES product(product_id)
 );
