@@ -1,32 +1,42 @@
 package com.epam.courses.warehouse.dao;
 
-import com.epam.courses.warehouse.model.Product;
 import com.epam.courses.warehouse.model.ProductRecord;
-import org.springframework.stereotype.Repository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
-import java.sql.Date;
-import java.util.List;
+import java.util.Objects;
 
-@Repository
-public class ProductRecordDAOJdbcMsql implements ProductRecordDAO {
 
-    @Override
+public class ProductRecordDAOJdbcMsql implements ProductRecordDAO{
+
+    private Logger LOGGER = LoggerFactory.getLogger(ProductRecordDtoDAOJdbcMsql.class);
+
+    @Value("${record.create}")
+    private String sqlCreateRecord;
+
+    private NamedParameterJdbcTemplate jdbcTemplate;
+
+    public ProductRecordDAOJdbcMsql(NamedParameterJdbcTemplate namedParameterJdbcTemplate){
+        this.jdbcTemplate = namedParameterJdbcTemplate;
+    }
+
+        @Override
     public Integer create(ProductRecord productRecord) {
-        return null;
-    }
+        LOGGER.debug("ProductRecordDAOJdbcMsql:create productId = " + productRecord.getProductId());
+        KeyHolder keyHolder = new GeneratedKeyHolder();
 
-    @Override
-    public List<ProductRecord> getAll() {
-        return null;
-    }
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource()
+                .addValue("product_id", productRecord.getProductId())
+                .addValue("count", productRecord.getQuantityOfProduct())
+                .addValue("date", productRecord.getProductRecordDate())
+                .addValue("deal_type", productRecord.getDealType().getValue());
 
-    @Override
-    public List<ProductRecord> getAllProductRecords(Date from, Date by) {
-        return null;
-    }
-
-    @Override
-    public Integer countProductInWarehouse(Product product) {
-        return null;
+        jdbcTemplate.update(sqlCreateRecord, parameterSource, keyHolder);
+        return Objects.requireNonNull(keyHolder.getKey()).intValue();
     }
 }
