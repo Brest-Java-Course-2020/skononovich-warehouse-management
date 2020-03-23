@@ -1,8 +1,7 @@
-package com.epam.courses.warehouse.dao.RowMaper;
+package com.epam.courses.warehouse.dao.rowMapper;
 
 import com.epam.courses.warehouse.model.Product;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
