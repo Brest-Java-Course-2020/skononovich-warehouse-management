@@ -7,12 +7,23 @@
        http://www.springframework.org/schema/jdbc
        http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
-    <bean id="productDAOJdbcMsql" class="com.epam.courses.warehouse.dao.ProductDAOJdbcMsql">
+    <bean id="productRecordDAO" class="com.epam.courses.warehouse.dao.ProductRecordDAOJdbcMsql">
         <constructor-arg ref="jdbcTemplate"/>
-        <constructor-arg ref="rowMapper"/>
     </bean>
 
-    <bean id="rowMapper" class="com.epam.courses.warehouse.dao.RowMaper.ProductRowMapper"/>
+    <bean id="productDAOJdbcMsql" class="com.epam.courses.warehouse.dao.ProductDAOJdbcMsql">
+        <constructor-arg ref="jdbcTemplate"/>
+        <constructor-arg ref="productRowMapper"/>
+    </bean>
+
+    <bean id="productRecordDtoDAO" class="com.epam.courses.warehouse.dao.ProductRecordDtoDAOJdbcMsql">
+        <constructor-arg ref="jdbcTemplate"/>
+        <constructor-arg ref="productRecordDtoRowMapper"/>
+    </bean>
+
+    <bean id="productRecordDtoRowMapper" class="com.epam.courses.warehouse.dao.rowMapper.ProductRecordDtoRowMapper"/>
+
+    <bean id="productRowMapper" class="com.epam.courses.warehouse.dao.rowMapper.ProductRowMapper"/>
 
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
         <constructor-arg ref="dataSource"/>
