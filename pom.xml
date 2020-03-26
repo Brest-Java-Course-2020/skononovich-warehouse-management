@@ -15,6 +15,7 @@
         <module>warehouse-management-dao-api</module>
         <module>warehouse-management-dao</module>
         <module>warehouse-management-service-api</module>
+        <module>warehouse-management-service</module>
     </modules>
 
     <properties>
