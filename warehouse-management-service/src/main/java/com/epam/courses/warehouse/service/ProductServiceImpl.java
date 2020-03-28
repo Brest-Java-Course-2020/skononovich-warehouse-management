@@ -21,7 +21,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Integer create(Product product) {
         LOGGER.debug("ProductServiceImpl:create");
-
         return productDAO.create(product);
     }
 
