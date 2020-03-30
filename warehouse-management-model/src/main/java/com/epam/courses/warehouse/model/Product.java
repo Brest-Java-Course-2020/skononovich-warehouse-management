@@ -56,7 +56,7 @@ public class Product {
     public String toString() {
         return "Product{" +
                 "productId=" + productId +
-                ", productTitle='" + productName + '\'' +
+                ", productName='" + productName + '\'' +
                 '}';
     }
 }

@@ -24,12 +24,11 @@
             <groupId>com.epam.courses.warehouse</groupId>
             <artifactId>warehouse-management-dao</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
         </dependency>
-
-
     </dependencies>
 
 
