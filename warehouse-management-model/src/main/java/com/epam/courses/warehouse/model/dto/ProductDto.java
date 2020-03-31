@@ -45,9 +45,11 @@ public class ProductDto {
     /**
      * Set the Product identifier.
      * @param productId product id.
+     * @return this dto product.
      */
-    public void setProductId(Integer productId) {
+    public ProductDto setProductId(Integer productId) {
         this.productId = productId;
+        return this;
     }
 
     /**
@@ -61,9 +63,11 @@ public class ProductDto {
     /**
      * Set the product name.
      * @param productName product name.
+     * @return this dto product.
      */
-    public void setProductName(String productName) {
+    public ProductDto setProductName(String productName) {
         this.productName = productName;
+        return this;
     }
 
     /**
@@ -72,6 +76,16 @@ public class ProductDto {
      */
     public Integer getProductSumCount() {
         return productSumCount;
+    }
+
+    /**
+     * Set the Product quantity.
+     * @param sumCount product quantity.
+     * @return this dto product.
+     */
+    public ProductDto setProductSumCount(Integer sumCount){
+        this.productSumCount = sumCount;
+        return this;
     }
 
     /**
