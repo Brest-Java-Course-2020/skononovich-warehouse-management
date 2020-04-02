@@ -15,8 +15,11 @@ public class ProductServiceImpl implements ProductService {
 
     private Logger LOGGER = LoggerFactory.getLogger(ProductServiceImpl.class);
 
-    @Autowired
     private ProductDAO productDAO;
+
+    public ProductServiceImpl(ProductDAO productDAO){
+        this.productDAO = productDAO;
+    }
 
     @Override
     public Integer create(Product product) {

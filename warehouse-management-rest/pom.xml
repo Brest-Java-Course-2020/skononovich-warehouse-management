@@ -25,6 +25,10 @@
             <groupId>com.epam.courses.warehouse</groupId>
             <artifactId>warehouse-management-service</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.epam.courses.warehouse</groupId>
+            <artifactId>warehouse-management-test-db</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
