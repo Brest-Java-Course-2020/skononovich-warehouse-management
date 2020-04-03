@@ -28,19 +28,42 @@
         </property>
     </bean>
 
+    <bean id="productRecordDtoController" class="com.epam.courses.warehouse.rest.ProductRecordDtoController">
+        <constructor-arg ref="productRecordDtoService"/>
+    </bean>
+    <bean id="productRecordDtoService" class="com.epam.courses.warehouse.service.ProductRecordDtoServiceImpl"/>
+    <bean id="productRecordDtoDAO" class="com.epam.courses.warehouse.dao.ProductRecordDtoDAOJdbcMsql">
+        <constructor-arg ref="jdbcTemplate"/>
+        <constructor-arg ref="productRecordDtoRowMapper"/>
+    </bean>
+    <bean id="productRecordDtoRowMapper" class="com.epam.courses.warehouse.dao.rowMapper.ProductRecordDtoRowMapper"/>
+
+    <bean id="productRecordController" class="com.epam.courses.warehouse.rest.ProductRecordController">
+        <constructor-arg ref="productRecordService"/>
+    </bean>
+    <bean id="productRecordService" class="com.epam.courses.warehouse.service.ProductRecordServiceImpl"/>
+    <bean id="productRecordDao" class="com.epam.courses.warehouse.dao.ProductRecordDAOJdbcMsql">
+        <constructor-arg ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="productDtoController" class="com.epam.courses.warehouse.rest.ProductDtoController">
+        <constructor-arg ref="productDtoService"/>
+    </bean>
+    <bean id="productDtoService" class="com.epam.courses.warehouse.service.ProductDtoServiceImpl"/>
+    <bean id="productDtoDao" class="com.epam.courses.warehouse.dao.ProductDtoDAOJdbcMsql">
+        <constructor-arg ref="jdbcTemplate"/>
+    </bean>
+
     <bean id="productController" class="com.epam.courses.warehouse.rest.ProductController">
         <constructor-arg ref="productService"/>
     </bean>
-
     <bean id="productService" class="com.epam.courses.warehouse.service.ProductServiceImpl">
         <constructor-arg ref="productDao"/>
     </bean>
-
     <bean id="productDao" class="com.epam.courses.warehouse.dao.ProductDAOJdbcMsql">
         <constructor-arg ref="jdbcTemplate"/>
         <constructor-arg ref="productRowMapper"/>
     </bean>
-
     <bean id="productRowMapper" class="com.epam.courses.warehouse.dao.rowMapper.ProductRowMapper"/>
 
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
