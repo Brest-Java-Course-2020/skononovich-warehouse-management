@@ -92,7 +92,7 @@ public class ProductRecordDTO {
          * Return <code>Date</code> representation of deal date.
          * @return dealDate deal date.
          */
-        public Date getDealDateDate() {
+        public Date getDealDate() {
             return dealDate;
         }
 
