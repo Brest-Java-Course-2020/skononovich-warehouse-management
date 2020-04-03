@@ -1,6 +1,5 @@
 package com.epam.courses.warehouse.rest;
 
-import com.epam.courses.warehouse.model.Product;
 import com.epam.courses.warehouse.model.ProductRecord;
 import com.epam.courses.warehouse.service.ProductRecordService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -49,7 +48,7 @@ class ProductRecordControllerTest {
 
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/records")
-                        .content(objectMapper.writeValueAsString(new Product()))
+                        .content(objectMapper.writeValueAsString(new ProductRecord()))
                         .contentType("application/json")
         ).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
