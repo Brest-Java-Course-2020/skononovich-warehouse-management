@@ -19,6 +19,14 @@
         </dependency>
         <dependency>
             <groupId>com.epam.courses.warehouse</groupId>
+            <artifactId>warehouse-management-dao-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.courses.warehouse</groupId>
+            <artifactId>warehouse-management-dao</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.courses.warehouse</groupId>
             <artifactId>warehouse-management-service-api</artifactId>
         </dependency>
         <dependency>

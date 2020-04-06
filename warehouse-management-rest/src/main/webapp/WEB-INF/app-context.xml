@@ -30,4 +30,11 @@
         </property>
     </bean>
 
+    <bean id="productRecordDtoRowMapper" class="com.epam.courses.warehouse.dao.rowMapper.ProductRecordDtoRowMapper"/>
+    <bean id="productRowMapper" class="com.epam.courses.warehouse.dao.rowMapper.ProductRowMapper"/>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
 </beans>
