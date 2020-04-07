@@ -17,6 +17,7 @@
         <module>warehouse-management-service-api</module>
         <module>warehouse-management-service</module>
         <module>warehouse-management-rest</module>
+        <module>warehouse-management-service-rest</module>
     </modules>
 
     <properties>
