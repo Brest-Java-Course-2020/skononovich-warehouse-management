@@ -72,42 +72,23 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>GTX 1080</td>
-                            <td>10</td>
+                        <tr th:each="product : ${products}">
+                            <td th:text="${product.productName}"></td>
+                            <td th:text="${product.productSumCount}"></td>
                             <td class="text-right">
-                                <a href="product.html"
-                                   th:href="@{/product}"
+                                <a href="department.html"
+                                   th:href="@{|/product/${product.productId}|}"
                                    class="btn-sm btn-outline-secondary"
-                                   title="Редактировать товар"
+                                   title="Edit product"
                                    data-toggle="tooltip"
                                    data-placement="top">
-                                    <i class="fa fa-pencil"></i> <span
-                                        class="d-none d-md-inline">Редактировать</span></a>
-                                <span data-toggle="modal" data-target="#deleteDialog">
+                                    <i class="fa fa-pencil"></i>
+                                    <span class="d-none d-md-inline">Редактировать</span></a>
+                                <span data-toggle="modal"
+                                      data-target="#deleteDialog"
+                                      th:attr="data-id=${product.productId},data-name=${product.productName}">
                                 <a href="#" class="btn-sm btn-outline-secondary"
-                                   title="Удалить товар"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="fa fa-remove"></i> <span class="d-none d-md-inline">Удалить</span></a>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>RTX 2080</td>
-                            <td>12</td>
-                            <td class="text-right">
-                                <a href="product.html"
-                                   th:href="@{/product}"
-                                   class="btn-sm btn-outline-secondary"
-                                   title="Редактировать товар"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="fa fa-pencil"></i> <span
-                                        class="d-none d-md-inline">Редактировать</span></a>
-                                <span data-toggle="modal" data-target="#deleteDialog">
-                                <a href="#" class="btn-sm btn-outline-secondary"
-                                   title="Удалить товар"
+                                   title="delete product"
                                    data-toggle="tooltip"
                                    data-placement="top">
                                     <i class="fa fa-remove"></i> <span class="d-none d-md-inline">Удалить</span></a>

@@ -18,9 +18,37 @@
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
     <!-- Component scan for @Controller, @Service... annotations -->
-    <context:component-scan base-package="com.epam.brest.courses.*"/>
+    <context:component-scan base-package="com.epam.courses.warehouse.*"/>
 
-    <import resource="classpath*:test-db.xml"/>
+    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:application.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="productController" class="com.epam.courses.warehouse.web_app.ProductController">
+        <constructor-arg index="0" ref="productServiceRest"/>
+        <constructor-arg index="1" ref="productDtoServiceRest"/>
+    </bean>
+    <bean id="productServiceRest" class="com.epam.courses.warehouse.service_rest.ProductServiceRest">
+        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.products}"/>
+        <constructor-arg index="1" ref="restTemplate"/>
+    </bean>
+    <bean id="productDtoServiceRest" class="com.epam.courses.warehouse.service_rest.ProductDtoServiceRest">
+        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.products_dtos}"/>
+        <constructor-arg index="1" ref="restTemplate"/>
+    </bean>
+
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+
 
     <!-- Thymeleaf Template Resolver -->
     <bean id="templateResolver"

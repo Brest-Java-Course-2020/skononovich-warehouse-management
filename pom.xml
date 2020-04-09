@@ -18,6 +18,7 @@
         <module>warehouse-management-service</module>
         <module>warehouse-management-rest</module>
         <module>warehouse-management-service-rest</module>
+        <module>warehouse-management-web-app</module>
     </modules>
 
     <properties>
@@ -69,6 +70,16 @@
             <dependency>
                 <groupId>com.epam.courses.warehouse</groupId>
                 <artifactId>warehouse-management-rest</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.epam.courses.warehouse</groupId>
+                <artifactId>warehouse-management-service-rest</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.epam.courses.warehouse</groupId>
+                <artifactId>warehouse-management-web-app</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
