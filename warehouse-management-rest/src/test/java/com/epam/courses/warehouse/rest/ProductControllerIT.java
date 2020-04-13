@@ -134,7 +134,7 @@ public class ProductControllerIT {
         MockHttpServletResponse response = mockMvc.perform(
                 MockMvcRequestBuilders.post(PRODUCTS_ENDPOINT)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(productName))
+                        .content(objectMapper.writeValueAsString(new Product().setProductName(productName)))
         ).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))

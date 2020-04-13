@@ -28,7 +28,7 @@ public class ProductServiceRest implements ProductService {
     public Integer create(Product product) {
         LOGGER.debug("ProductServiceRest:create({})", product);
 
-        ResponseEntity<Integer> responseEntity = restTemplate.postForEntity(url, product.getProductName(), Integer.class);
+        ResponseEntity<Integer> responseEntity = restTemplate.postForEntity(url, product, Integer.class);
         return responseEntity.getBody();
     }
 

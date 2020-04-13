@@ -47,10 +47,10 @@ public class ProductController {
     }
 
     @PostMapping(path = "/products", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Integer> create(@RequestBody String productName){
+    public ResponseEntity<Integer> create(@RequestBody Product product){
         LOGGER.debug("ProductController:create");
 
-        Integer productId = productService.create(new Product().setProductName(productName));
+        Integer productId = productService.create(product);
         return new ResponseEntity<>(productId, HttpStatus.OK);
     }
 
