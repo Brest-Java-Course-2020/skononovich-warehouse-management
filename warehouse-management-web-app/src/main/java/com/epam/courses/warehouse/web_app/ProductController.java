@@ -86,7 +86,7 @@ public class ProductController {
     }
 
     /**
-     * Persist new department into persistence storage.
+     * Persist new product into persistence storage.
      *
      * @param product new product with filled data.
      * @param result     binding result.
@@ -104,15 +104,17 @@ public class ProductController {
 
 
     /**
-     * Delete department.
+     * Delete product.
      *
      * @return view name
      */
-    @GetMapping(value = "/product/{id}/delete")
+    @GetMapping(value = "/product/delete/{id}")
     public final String deleteProductById(@PathVariable Integer id, Model model) {
 
         LOGGER.debug("delete({},{})", id, model);
         productService.delete(id);
         return "redirect:/products";
     }
+
+
 }

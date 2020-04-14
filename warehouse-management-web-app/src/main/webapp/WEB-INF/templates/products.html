@@ -31,7 +31,7 @@
         <th><span th:text="${product.productName}">Default</span></th>
         <th><span th:text="${product.productSumCount}">Default</span></th>
         <td>Edit</td>
-        <td>Delete</td>
+        <td><a th:href="@{/product/delete/{id}(id=${product.productId})}">Delete</a></td>
     </tr>
     </tbody>
 </table>
