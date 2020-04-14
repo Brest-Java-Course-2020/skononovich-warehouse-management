@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Circulation list</title>
+</head>
+<body>
+<h2>Circulation list</h2>
+
+<div align="center">
+    <a th:href="@{/products}">Products</a> |
+    <a th:href="@{/record}">Add record</a> |
+    <a th:href="@{/circulation}">Products circulation</a>
+</div>
+
+<p></p>
+<table align="center">
+    <thead>
+    <tr>
+        <td>Product name</td>
+        <td>Quantity</td>
+        <td>Date</td>
+        <td>Deal type</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="record : ${records}">
+        <th><span th:text="${record.productName}">Default</span></th>
+        <th><span th:text="${record.quantityOfProduct}">Default</span></th>
+        <th><span th:text="${#dates.format(record.dealDate, 'dd-MM-yyyy')}">Default</span></th>
+        <th><span th:text="${record.dealType}">Default</span></th>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
