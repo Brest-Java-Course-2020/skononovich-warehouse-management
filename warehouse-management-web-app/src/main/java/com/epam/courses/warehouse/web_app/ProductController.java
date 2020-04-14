@@ -42,9 +42,8 @@ public class ProductController {
     Optional<Product> productOptional = productService.getById(id);
 
     if(productOptional.isPresent()){
-        model.addAttribute("isNew", false);
-        model.addAttribute("department", productOptional.get());
-        return "product";
+        model.addAttribute("product", productOptional.get());
+        return "updateProduct";
     } else {
         // TODO department not found - pass error message as parameter or handle not found error
         return "redirect:products";

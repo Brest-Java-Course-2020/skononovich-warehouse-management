@@ -8,9 +8,9 @@
 <h2>Products list</h2>
 
 <div align="center">
-    <a th:href="@{products}">Products</a> |
-    <a th:href="@{record}">Add record</a> |
-    <a th:href="@{circulation}">Products circulation</a>
+    <a th:href="@{/products}">Products</a> |
+    <a th:href="@{/record}">Add record</a> |
+    <a th:href="@{/circulation}">Products circulation</a>
 </div>
 
 
@@ -30,7 +30,7 @@
     <tr th:each="product : ${products}">
         <th><span th:text="${product.productName}">Default</span></th>
         <th><span th:text="${product.productSumCount}">Default</span></th>
-        <td>Edit</td>
+        <td><a th:href="@{/product/{id}(id=${product.productId})}">Edit</a></td>
         <td><a th:href="@{/product/delete/{id}(id=${product.productId})}">Delete</a></td>
     </tr>
     </tbody>
