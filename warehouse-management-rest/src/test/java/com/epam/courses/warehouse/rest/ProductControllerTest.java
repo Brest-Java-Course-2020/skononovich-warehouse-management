@@ -86,7 +86,7 @@ public class ProductControllerTest {
 
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/products")
-                        .content("test")
+                        .content(objectMapper.writeValueAsString(new Product().setProductName("test")))
                         .contentType("application/json")
         ).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())

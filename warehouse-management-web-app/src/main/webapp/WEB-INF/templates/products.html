@@ -1,164 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet"
-          href="../../resources/static/css/font-awesome.min.css"
-          th:href="@{/resources/static/css/font-awesome.min.css}">
-    <link rel="stylesheet"
-          href="../../resources/static/css/bootstrap.css"
-          th:href="@{/resources/static/css/bootstrap.css}">
-    <link rel="stylesheet"
-          href="../../resources/static/css/style.css"
-          th:href="@{/resources/static/css/style.css}">
-    <title>Products</title>
+    <meta charset="UTF-8">
+    <title>Products list</title>
 </head>
 <body>
+<h2>Products list</h2>
 
-<header>
-    <nav class="pl-2 navbar navbar-expand-sm navbar-dark bg-dark text-light  p-0">
-        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a href="/" class="navbar-brand"><img src="../../resources/static/img/logo.svg"
-                                              th:src="@{/resources/static/img/logo.svg}"
-                                              height="32" width="32" alt="Учет товара"></a>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <a class="nav-item nav-link active"
-                   href="products.html"
-                   th:href="@{/products}">Список товаров</a>
-
-                <a class="nav-item nav-link"
-                   href="record.html"
-                   th:href="@{/record}">Работа с товаром</a>
-
-                <a class="nav-item nav-link"
-                   href="circulation.html"
-                   th:href="@{/circulation}">Оборот товара</a>
-            </ul>
-        </div>
-    </nav>
-    <nav id="main-header"
-         class="py-1 mb-3 navbar navbar-expand-sm navbar-light bg-light text-dark">
-        <span class="navbar-brand text-uppercase mr-auto">Товары на складе</span>
-        <ul class="navbar-nav float-right">
-            <li class="nav-item">
-                <a href="product.html"
-                   th:href="@{/product}"
-                   class="btn btn-light"
-                   title="Добавить товар"
-                   data-toggle="tooltip"
-                   data-placement="bottom">
-                    <i class="fa fa-plus"></i> <span
-                        class="d-none d-sm-inline">Добавить</span></a>
-            </li>
-        </ul>
-    </nav>
-</header>
-
-<section id="products">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <div class="card">
-                    <table class="table table-striped">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th>Название</th>
-                            <th>На складе</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>GTX 1080</td>
-                            <td>10</td>
-                            <td class="text-right">
-                                <a href="product.html"
-                                   th:href="@{/product}"
-                                   class="btn-sm btn-outline-secondary"
-                                   title="Редактировать товар"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="fa fa-pencil"></i> <span
-                                        class="d-none d-md-inline">Редактировать</span></a>
-                                <span data-toggle="modal" data-target="#deleteDialog">
-                                <a href="#" class="btn-sm btn-outline-secondary"
-                                   title="Удалить товар"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="fa fa-remove"></i> <span class="d-none d-md-inline">Удалить</span></a>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>RTX 2080</td>
-                            <td>12</td>
-                            <td class="text-right">
-                                <a href="product.html"
-                                   th:href="@{/product}"
-                                   class="btn-sm btn-outline-secondary"
-                                   title="Редактировать товар"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="fa fa-pencil"></i> <span
-                                        class="d-none d-md-inline">Редактировать</span></a>
-                                <span data-toggle="modal" data-target="#deleteDialog">
-                                <a href="#" class="btn-sm btn-outline-secondary"
-                                   title="Удалить товар"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="fa fa-remove"></i> <span class="d-none d-md-inline">Удалить</span></a>
-                                </span>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<footer>
-    <hr/>
-    <p class="text-center">&copy; 2020</p>
-</footer>
-
-<!-- Confirm delete Modal -->
-<div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog"
-     aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header alert-danger">
-                <h5 class="modal-title" id="exampleModalLabel">Удалить товар</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Пожалуйста, подтвердите удаление
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
-                <button type="button" class="btn btn-danger">Удалить</button>
-            </div>
-        </div>
-    </div>
+<div align="center">
+    <a th:href="@{/products}">Products</a> |
+    <a th:href="@{/record}">Add record</a> |
+    <a th:href="@{/circulation}">Products circulation</a>
 </div>
 
-<script src="../../resources/static/js/jquery-3.4.1.slim.min.js"
-        th:src="@{/resources/static/js/jquery-3.4.1.slim.min.js}"></script>
-<script src="../../resources/static/js/popper.min.js"
-        th:src="@{/resources/static/js/popper.min.js}"></script>
-<script src="../../resources/static/js/bootstrap.min.js"
-        th:src="@{/resources/static/js/bootstrap.min.js}"></script>
-<script>
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-</script>
+
+<p align="center">
+    <a th:href="@{product}">Add product</a>
+</p>
+<table align="center" th:unless="${#lists.isEmpty(products)}">
+    <thead>
+    <tr>
+        <td>Product name</td>
+        <td>Quantity</td>
+        <td></td>
+        <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <th><span th:text="${product.productName}">Default</span></th>
+        <th><span th:text="${product.productSumCount}">Default</span></th>
+        <td><a th:href="@{/product/{id}(id=${product.productId})}">Edit</a></td>
+        <td><a th:href="@{/product/delete/{id}(id=${product.productId})}">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

@@ -56,7 +56,7 @@ class ProductServiceRestTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(mapper.writeValueAsString(PRODUCT_ID)));
 
-        int productId = productServiceRest.create(any(Product.class));
+        int productId = productServiceRest.create(new Product().setProductName("Product"));
 
         assertEquals(PRODUCT_ID, productId);
     }
