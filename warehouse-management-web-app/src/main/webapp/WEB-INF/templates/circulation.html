@@ -14,6 +14,20 @@
 </div>
 
 <p></p>
+
+<div align="center">
+<form id="filterForm"
+      th:action="@{/filter}"
+      th:object="${interval}"
+      th:method="${post}">
+    <input type="date" name="dateFrom" id="dateFrom" th:field="*{regStartInterval}">
+    <input type="date" name="dateTo" id="dateTo" th:field="*{regEndInterval}">
+
+    <input type="submit" title="Filter products circulation" value="Filter">
+</form>
+</div>
+
+<p></p>
 <table align="center">
     <thead>
     <tr>
