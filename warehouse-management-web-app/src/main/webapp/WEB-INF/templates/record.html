@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Add product record</title>
+</head>
+<body>
+<h2>Add product record</h2>
+
+<div align="center">
+    <a th:href="@{/products}">Products</a> |
+    <a th:href="@{/record}">Add record</a> |
+    <a th:href="@{/circulation}">Products circulation</a>
+</div>
+
+<div align="center">
+    <form action="#"
+          id="recordForm"
+          th:id="recordForm"
+          method="post"
+          th:action="@{/record}"
+          th:object="${record}">
+
+        <input id="field_productRecordId"
+               type="hidden"
+               th:field="*{productRecordId}"/>
+
+        <p>
+        <label for="field_product">Product name</label>
+        <select id="field_product"
+                th:field="*{productId}">
+            <option th:each="product : ${products}"
+                    th:value="${product.productId}"
+                    th:text="${product.productName}">GTX 980</option>
+        </select>
+        </p>
+
+        <p>
+        <label for="field_quantity">Quantity</label>
+        <input type="number" id="field_quantity" th:field="*{quantityOfProduct}" min="0">
+        </p>
+        <p>
+        <label for="field_date">Deal date</label>
+        <input type="date" id="field_date" th:field="*{productRecordDate}">
+        </p>
+        <p>
+        <label for="field_dealType">Deal type</label>
+            <select id="field_dealType" th:field="*{dealType}">
+                <option th:each="dealType : ${dealTypes}"
+                        th:value="${dealType}"
+                        th:text="${dealType.name()}"></option>
+            </select>
+        </p>
+        <p>
+        <input type="submit" value="Submit" /> <input type="reset" value="Reset" />
+            <a th:href="@{/saveRecord}" th:onclick="@{document.forms['recordForm'].submit(); return false;}"
+               title="Create record"
+               >Save</a>
+        </p>
+    </form>
+</div>
+
+
+</body>
+</html>
