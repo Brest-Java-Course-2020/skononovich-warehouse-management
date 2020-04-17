@@ -45,6 +45,7 @@
     <bean id="recordController" class="com.epam.courses.warehouse.web_app.RecordController">
         <constructor-arg index="0" ref="productRecordServiceRest"/>
         <constructor-arg index="1" ref="productRecordDtoServiceRest"/>
+        <constructor-arg index="2" ref="productServiceRest"/>
     </bean>
     <bean id="productRecordServiceRest" class="com.epam.courses.warehouse.service_rest.ProductRecordServiceRest">
         <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.records}"/>
