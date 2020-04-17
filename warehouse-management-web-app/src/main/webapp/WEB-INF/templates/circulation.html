@@ -20,8 +20,8 @@
       th:action="@{/filter}"
       th:object="${interval}"
       th:method="${post}">
-    <input type="date" name="dateFrom" id="dateFrom" th:field="*{regStartInterval}">
-    <input type="date" name="dateTo" id="dateTo" th:field="*{regEndInterval}">
+    <input type="date" name="dateFrom" id="dateFrom" th:field="*{startInterval}">
+    <input type="date" name="dateTo" id="dateTo" th:field="*{endInterval}">
 
     <input type="submit" title="Filter products circulation" value="Filter">
 </form>
