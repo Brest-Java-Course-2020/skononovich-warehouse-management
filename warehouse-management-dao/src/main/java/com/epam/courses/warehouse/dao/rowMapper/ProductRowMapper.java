@@ -2,12 +2,10 @@ package com.epam.courses.warehouse.dao.rowMapper;
 
 import com.epam.courses.warehouse.model.Product;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@Repository
 public class ProductRowMapper implements RowMapper<Product> {
 
     @Override
