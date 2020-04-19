@@ -36,6 +36,9 @@ public class ProductDAOJdbcMsql implements ProductDAO {
     @Value("${product.delete}")
     private String sqlDeleteProduct;
 
+    @Value("${product.isProductExist}")
+    private String sqlIsProductExist;
+
     private NamedParameterJdbcTemplate jdbcTemplate;
     private ProductRowMapper productRowMapper;
 
@@ -100,8 +103,7 @@ public class ProductDAOJdbcMsql implements ProductDAO {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource()
                 .addValue("product_name", product.getProductName());
 
-        String sql = "SELECT EXISTS (SELECT * FROM product p WHERE p.product_name = :product_name)";
-        Integer countProducts = jdbcTemplate.queryForObject(sql, parameterSource, Integer.class);
+        Integer countProducts = jdbcTemplate.queryForObject(sqlIsProductExist, parameterSource, Integer.class);
 
         return Objects.requireNonNull(countProducts).equals(1);
     }
