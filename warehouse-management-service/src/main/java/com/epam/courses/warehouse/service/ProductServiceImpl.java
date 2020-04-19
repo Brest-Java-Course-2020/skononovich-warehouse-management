@@ -50,4 +50,10 @@ public class ProductServiceImpl implements ProductService {
         LOGGER.debug("ProductServiceImpl:delete");
         return productDAO.delete(productId);
     }
+
+    @Override
+    public Boolean isExist(Product product) {
+        LOGGER.debug("ProductServiceImpl:isExist {}", product);
+        return  productDAO.isExist(product);
+    }
 }

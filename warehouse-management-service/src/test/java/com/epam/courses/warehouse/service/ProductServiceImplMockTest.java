@@ -106,4 +106,18 @@ public class ProductServiceImplMockTest {
 
         verify(productDAO).delete(any(Integer.class));
     }
+
+    @Test
+    public void shouldCheckProductExistence(){
+        Product product = new Product().setProductName("PName");
+
+        when(productDAO.isExist(product)).thenReturn(true);
+
+        Boolean response = productService.isExist(product);
+
+        assertNotNull(response);
+        assertTrue(response);
+
+        verify(productDAO).isExist(any(Product.class));
+    }
 }
