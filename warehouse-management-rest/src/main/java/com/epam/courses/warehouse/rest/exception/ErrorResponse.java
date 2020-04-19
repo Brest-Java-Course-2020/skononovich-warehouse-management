@@ -1,6 +1,5 @@
 package com.epam.courses.warehouse.rest.exception;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 

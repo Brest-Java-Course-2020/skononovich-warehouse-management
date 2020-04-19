@@ -1,7 +1,6 @@
 package com.epam.courses.warehouse.service_rest;
 
 import com.epam.courses.warehouse.model.Product;
-import com.epam.courses.warehouse.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
@@ -11,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-public class ProductServiceRest implements ProductService {
+public class ProductServiceRest {
 
     private Logger LOGGER = LoggerFactory.getLogger(ProductServiceRest.class);
 
@@ -24,7 +23,6 @@ public class ProductServiceRest implements ProductService {
         this.restTemplate = restTemplate;
     }
 
-    @Override
     public Integer create(Product product) {
         LOGGER.debug("ProductServiceRest:create({})", product);
 
@@ -32,7 +30,6 @@ public class ProductServiceRest implements ProductService {
         return responseEntity.getBody();
     }
 
-    @Override
     public List<Product> getAll() {
         LOGGER.debug("ProductServiceRest:getAll()");
 
@@ -40,7 +37,6 @@ public class ProductServiceRest implements ProductService {
         return (List<Product>) responseEntity.getBody();
     }
 
-    @Override
     public Optional<Product> getById(Integer productId) {
         LOGGER.debug("ProductServiceRest:findById({})", productId);
 
@@ -49,7 +45,6 @@ public class ProductServiceRest implements ProductService {
         return Optional.ofNullable(responseEntity.getBody());
     }
 
-    @Override
     public Integer update(Product product) {
         LOGGER.debug("ProductServiceRest:update({})", product);
 
@@ -60,7 +55,6 @@ public class ProductServiceRest implements ProductService {
         return result.getBody();
     }
 
-    @Override
     public Integer delete(Integer productId) {
         LOGGER.debug("ProductServiceRest:delete({})", productId);
 
