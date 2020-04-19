@@ -92,4 +92,17 @@ public class ProductDAOJdbcMsql implements ProductDAO {
                 .addValue("product_id", productId);
         return jdbcTemplate.update(sqlDeleteProduct, parameterSource);
     }
+
+    @Override
+    public Boolean isExist(Product product) {
+        LOGGER.debug("ProductDAOJdbcMsql:isExist {}", product);
+
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource()
+                .addValue("product_name", product.getProductName());
+
+        String sql = "SELECT EXISTS (SELECT * FROM product p WHERE p.product_name = :product_name)";
+        Integer countProducts = jdbcTemplate.queryForObject(sql, parameterSource, Integer.class);
+
+        return Objects.requireNonNull(countProducts).equals(1);
+    }
 }
