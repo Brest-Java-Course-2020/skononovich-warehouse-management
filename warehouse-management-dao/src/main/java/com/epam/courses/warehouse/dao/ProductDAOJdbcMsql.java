@@ -5,6 +5,7 @@ import com.epam.courses.warehouse.model.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -34,6 +35,9 @@ public class ProductDAOJdbcMsql implements ProductDAO {
 
     @Value("${product.delete}")
     private String sqlDeleteProduct;
+
+    @Value("${product.isProductExist}")
+    private String sqlIsProductExist;
 
     private NamedParameterJdbcTemplate jdbcTemplate;
     private ProductRowMapper productRowMapper;
@@ -68,7 +72,9 @@ public class ProductDAOJdbcMsql implements ProductDAO {
 
         MapSqlParameterSource parameterSource = new MapSqlParameterSource().addValue("product_id", productId);
 
-        return Optional.ofNullable(jdbcTemplate.queryForObject(sqlGetProductById, parameterSource, productRowMapper));
+        List<Product> products = jdbcTemplate.query(sqlGetProductById, parameterSource, productRowMapper);
+
+        return Optional.ofNullable(DataAccessUtils.uniqueResult(products));
     }
 
     @Override
@@ -88,5 +94,17 @@ public class ProductDAOJdbcMsql implements ProductDAO {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource()
                 .addValue("product_id", productId);
         return jdbcTemplate.update(sqlDeleteProduct, parameterSource);
+    }
+
+    @Override
+    public Boolean isExist(Product product) {
+        LOGGER.debug("ProductDAOJdbcMsql:isExist {}", product);
+
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource()
+                .addValue("product_name", product.getProductName());
+
+        Integer countProducts = jdbcTemplate.queryForObject(sqlIsProductExist, parameterSource, Integer.class);
+
+        return Objects.requireNonNull(countProducts).equals(1);
     }
 }
