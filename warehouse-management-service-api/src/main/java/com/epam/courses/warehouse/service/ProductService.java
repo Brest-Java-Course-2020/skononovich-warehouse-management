@@ -42,4 +42,11 @@ public interface ProductService {
      * @return number of deleted records.
      */
     Integer delete(Integer productId);
+
+    /**
+     * <code>Product</code> existence check.
+     * @param product product.
+     * @return Boolean representation product existence check.
+     */
+    Boolean isExist(Product product);
 }
