@@ -1,5 +1,6 @@
 package com.epam.courses.warehouse.rest.exception;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -35,8 +36,9 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
 
-    @ExceptionHandler(value = {IllegalArgumentException.class})
-    public ResponseEntity<ErrorResponse> handleIllegalArgumentException(Exception ex, WebRequest request) {
-        return new ResponseEntity<>(new ErrorResponse(VALIDATION_ERROR, ex), HttpStatus.UNPROCESSABLE_ENTITY);
+    @ExceptionHandler(value = {IllegalArgumentException.class, DataIntegrityViolationException.class})
+    public ResponseEntity<ErrorResponse> handleAnotherExceptions(Exception ex, WebRequest request) {
+        return new ResponseEntity<>(
+                new ErrorResponse(VALIDATION_ERROR, ex), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 }
