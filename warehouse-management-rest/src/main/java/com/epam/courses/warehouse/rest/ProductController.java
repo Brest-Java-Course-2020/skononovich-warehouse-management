@@ -2,7 +2,6 @@ package com.epam.courses.warehouse.rest;
 
 import com.epam.courses.warehouse.model.Product;
 import com.epam.courses.warehouse.rest.exception.ErrorResponse;
-import com.epam.courses.warehouse.rest.exception.ProductNotFoundException;
 import com.epam.courses.warehouse.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +19,7 @@ import java.util.Optional;
 public class ProductController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
     public static final String PRODUCT_NOT_FOUND = "product.not_found";
+    public static final String PRODUCT_IS_EXIST = "product.is_exist";
 
     private final ProductService productService;
 
@@ -48,11 +48,18 @@ public class ProductController {
     }
 
     @PostMapping(path = "/products", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Integer> create(@RequestBody Product product){
+    public ResponseEntity create(@RequestBody Product product){
         LOGGER.debug("ProductController:create");
 
-        Integer productId = productService.create(product);
-        return new ResponseEntity<>(productId, HttpStatus.OK);
+        if(productService.isExist(product)){
+            return new ResponseEntity(
+                    new ErrorResponse(PRODUCT_IS_EXIST,
+                            Collections.singletonList("Product with name " + product.getProductName() + " is exist")),
+                    HttpStatus.CONFLICT);
+        } else {
+            Integer productId = productService.create(product);
+            return new ResponseEntity<>(productId, HttpStatus.OK);
+        }
     }
 
     @PutMapping(path = "/products", consumes = "application/json", produces = "application/json")

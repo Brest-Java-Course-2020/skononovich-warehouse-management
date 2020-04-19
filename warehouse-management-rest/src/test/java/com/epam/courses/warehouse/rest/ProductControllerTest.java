@@ -95,6 +95,7 @@ public class ProductControllerTest {
         ;
 
         verify(productService).create(any(Product.class));
+        verify(productService).isExist(any(Product.class));
     }
 
     @Test
