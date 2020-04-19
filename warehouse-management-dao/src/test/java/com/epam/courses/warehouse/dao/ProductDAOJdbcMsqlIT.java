@@ -24,7 +24,7 @@ class ProductDAOJdbcMsqlIT {
     private static final String FIRST_PRODUCT_NAME = "Product 1";
     private static final String THIRD_PRODUCT_NEW_NAME = "New product name";
     private static final Integer NOT_RELATED_PRODUCT_ID = 3;
-    private static final String NOT_RELATED_PRODUCT_NAME = "Product 3";
+    private static final String TEST_PRODUCT = "PRODUCT";
 
     @Autowired
     private ProductDAOJdbcMsql productDAOJdbcMsql;
@@ -85,4 +85,14 @@ class ProductDAOJdbcMsqlIT {
         assertEquals(sizeBeforeDelete - 1, sizeAfterDelete);
     }
 
+    @Test
+    public void shouldCheckProductExistence(){
+        Product product = new Product().setProductName(TEST_PRODUCT);
+        productDAOJdbcMsql.create(product);
+
+        Boolean productExistence = productDAOJdbcMsql.isExist(product);
+
+        assertNotNull(productExistence);
+        assertTrue(productExistence);
+    }
 }
