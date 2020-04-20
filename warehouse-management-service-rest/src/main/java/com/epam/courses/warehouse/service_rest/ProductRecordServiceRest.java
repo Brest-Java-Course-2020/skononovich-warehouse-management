@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-public class ProductRecordServiceRest implements ProductRecordService {
+public class ProductRecordServiceRest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductRecordServiceRest.class);
 
@@ -20,7 +20,6 @@ public class ProductRecordServiceRest implements ProductRecordService {
         this.restTemplate = restTemplate;
     }
 
-    @Override
     public Integer create(ProductRecord productRecord) {
         LOGGER.debug("ProductRecordServiceRest:create");
 
