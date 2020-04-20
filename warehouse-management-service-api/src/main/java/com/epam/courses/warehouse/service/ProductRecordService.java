@@ -12,4 +12,11 @@ public interface ProductRecordService {
      * @return product record id.
      */
     Integer create(ProductRecord productRecord);
+
+    /**
+     * Check quantity of product in warehouse.
+     * @param productRecord product record.
+     * @return <code>Boolean</code> representation, can give out a product or not.
+     */
+    Boolean shouldGiveOutProduct(ProductRecord productRecord);
 }
