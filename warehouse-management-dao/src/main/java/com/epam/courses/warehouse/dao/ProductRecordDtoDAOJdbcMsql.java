@@ -40,7 +40,7 @@ public class ProductRecordDtoDAOJdbcMsql implements ProductRecordDtoDAO {
 
     @Override
     public List<ProductRecordDTO> getAllInTimeInterval(Date from, Date to) {
-        LOGGER .debug("ProductRecordDAOJdbcMsql:getAllInTimeInterval from: " + from.toString() + " to: " + to);
+        LOGGER.debug("ProductRecordDAOJdbcMsql:getAllInTimeInterval from: " + from.toString() + " to: " + to);
         MapSqlParameterSource parameterSource = new MapSqlParameterSource()
                 .addValue("from", from)
                 .addValue("to", to);
