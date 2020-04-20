@@ -17,6 +17,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     public static final String PRODUCT_NOT_FOUND = "product.not_found";
     public static final String PRODUCT_IS_EXIST = "product.is_exist";
     public static final String VALIDATION_ERROR = "validation_error";
+    public static final String PRODUCT_NOT_ENOUGH = "product.not_enough";
 
     @ExceptionHandler(ProductNotFoundException.class)
     public final ResponseEntity<ErrorResponse> handleProductNotFoundException(
@@ -33,6 +34,15 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         List<String> details = new ArrayList<>();
         details.add(ex.getLocalizedMessage());
         ErrorResponse error = new ErrorResponse(PRODUCT_IS_EXIST, details);
+        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(ProductNotEnoughException.class)
+    public final ResponseEntity<ErrorResponse> handleProductNotEnoughException(
+            ProductNotEnoughException ex, WebRequest request) {
+        List<String> details = new ArrayList<>();
+        details.add(ex.getLocalizedMessage());
+        ErrorResponse error = new ErrorResponse(PRODUCT_NOT_ENOUGH, details);
         return new ResponseEntity<>(error, HttpStatus.CONFLICT);
     }
 
