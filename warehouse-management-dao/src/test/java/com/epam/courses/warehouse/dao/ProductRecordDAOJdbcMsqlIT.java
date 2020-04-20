@@ -12,8 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath:test-dao.xml", "classpath*:dao.xml"})
@@ -28,7 +28,6 @@ public class ProductRecordDAOJdbcMsqlIT {
     @Autowired
     private ProductRecordDAOJdbcMsql productRecordDAO;
 
-    //TODO: This is good practice?
     @Autowired
     private ProductRecordDtoDAOJdbcMsql productRecordDtoDAO;
 
@@ -46,5 +45,40 @@ public class ProductRecordDAOJdbcMsqlIT {
 
         assertNotNull(addedProductRecordId);
         assertEquals(sizeBeforeCreateNewRecord + 1, sizeAfterCreateNewRecord);
+    }
+
+    @Test
+    public void shouldGiveOutProduct(){
+        createProductRecord();
+
+        ProductRecord giveOutProductRecord = new ProductRecord()
+                .setProductId(3)
+                .setQuantityOfProduct(3);
+        Boolean shouldGiveProduct = productRecordDAO.shouldGiveOutProduct(giveOutProductRecord);
+
+        assertNotNull(shouldGiveProduct);
+        assertTrue(shouldGiveProduct);
+    }
+
+    @Test
+    public void cantGiveOutProduct(){
+        createProductRecord();
+
+        ProductRecord giveOutProductRecord = new ProductRecord()
+                .setProductId(3)
+                .setQuantityOfProduct(5);
+        Boolean shouldGiveProduct = productRecordDAO.shouldGiveOutProduct(giveOutProductRecord);
+
+        assertNotNull(shouldGiveProduct);
+        assertFalse(shouldGiveProduct);
+    }
+
+    private void createProductRecord(){
+        ProductRecord createdProductRecord = new ProductRecord()
+                .setProductId(3)
+                .setDealType(DealTypes.DELIVERY)
+                .setQuantityOfProduct(4)
+                .setProductRecordDate(Date.valueOf("2020-12-12"));
+        productRecordDAO.create(createdProductRecord);
     }
 }

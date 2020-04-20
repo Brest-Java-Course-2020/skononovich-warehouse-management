@@ -20,6 +20,9 @@ public class ProductRecordDAOJdbcMsql implements ProductRecordDAO{
     @Value("${record.create}")
     private String sqlCreateRecord;
 
+    @Value("${record.shouldGiveOutProduct}")
+    private String sqlShouldGiveOutProduct;
+
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     public ProductRecordDAOJdbcMsql(NamedParameterJdbcTemplate namedParameterJdbcTemplate){
@@ -39,5 +42,18 @@ public class ProductRecordDAOJdbcMsql implements ProductRecordDAO{
 
         jdbcTemplate.update(sqlCreateRecord, parameterSource, keyHolder);
         return Objects.requireNonNull(keyHolder.getKey()).intValue();
+    }
+
+
+    @Override
+    public Boolean shouldGiveOutProduct(ProductRecord productRecord) {
+        LOGGER.debug("shouldGiveOutProduct ({})", productRecord);
+
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource()
+                .addValue("product_id", productRecord.getProductId());
+
+        Integer response = jdbcTemplate.queryForObject(sqlShouldGiveOutProduct, parameterSource, Integer.class);
+
+        return Objects.requireNonNull(response) >= productRecord.getQuantityOfProduct();
     }
 }

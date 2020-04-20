@@ -21,4 +21,10 @@ public class ProductRecordServiceImpl implements ProductRecordService {
 
         return productRecordDAO.create(productRecord);
     }
+
+    @Override
+    public Boolean shouldGiveOutProduct(ProductRecord productRecord) {
+        LOGGER.debug("shouldGiveOutProduct ({})", productRecord);
+        return productRecordDAO.shouldGiveOutProduct(productRecord);
+    }
 }

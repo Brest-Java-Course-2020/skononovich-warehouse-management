@@ -1,5 +1,6 @@
 package com.epam.courses.warehouse.rest;
 
+import com.epam.courses.warehouse.model.DealTypes;
 import com.epam.courses.warehouse.model.ProductRecord;
 import com.epam.courses.warehouse.service.ProductRecordService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -44,11 +45,13 @@ class ProductRecordControllerTest {
 
     @Test
     void shouldCreateProductRecord() throws Exception {
+        ProductRecord productRecord = new ProductRecord()
+                .setDealType(DealTypes.GETTING);
         when(productRecordService.create(any(ProductRecord.class))).thenReturn(0);
 
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/records")
-                        .content(objectMapper.writeValueAsString(new ProductRecord()))
+                        .content(objectMapper.writeValueAsString(productRecord))
                         .contentType("application/json")
         ).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
