@@ -1,17 +1,15 @@
 package com.epam.courses.warehouse.web_app;
 
 import com.epam.courses.warehouse.model.DealTypes;
-import com.epam.courses.warehouse.model.Product;
 import com.epam.courses.warehouse.model.ProductRecord;
 import com.epam.courses.warehouse.model.filter.ProductRecordDateInterval;
-import com.epam.courses.warehouse.service.ProductService;
 import com.epam.courses.warehouse.service_rest.ProductRecordDtoServiceRest;
 import com.epam.courses.warehouse.service_rest.ProductRecordServiceRest;
+import com.epam.courses.warehouse.service_rest.ProductServiceRest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,11 +24,11 @@ public class RecordController {
 
     private final ProductRecordServiceRest productRecordServiceRest;
 
-    private final ProductService productService;
+    private final ProductServiceRest productService;
 
     public RecordController(ProductRecordServiceRest productRecordService,
                             ProductRecordDtoServiceRest productRecordDtoService,
-                            ProductService productService){
+                            ProductServiceRest productService){
         this.productRecordServiceRest = productRecordService;
         this.productRecordDtoServiceRest = productRecordDtoService;
         this.productService = productService;

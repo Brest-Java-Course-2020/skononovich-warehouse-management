@@ -1,8 +1,8 @@
 package com.epam.courses.warehouse.web_app;
 
 import com.epam.courses.warehouse.model.Product;
-import com.epam.courses.warehouse.service.ProductDtoService;
-import com.epam.courses.warehouse.service.ProductService;
+import com.epam.courses.warehouse.service_rest.ProductDtoServiceRest;
+import com.epam.courses.warehouse.service_rest.ProductServiceRest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -18,11 +18,11 @@ import java.util.Optional;
 public class ProductController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
 
-    private final ProductService productService;
+    private final ProductServiceRest productService;
 
-    private final ProductDtoService productDtoService;
+    private final ProductDtoServiceRest productDtoService;
 
-    public ProductController(ProductService productService, ProductDtoService productDtoService){
+    public ProductController(ProductServiceRest productService, ProductDtoServiceRest productDtoService){
         this.productService = productService;
         this.productDtoService = productDtoService;
     }
