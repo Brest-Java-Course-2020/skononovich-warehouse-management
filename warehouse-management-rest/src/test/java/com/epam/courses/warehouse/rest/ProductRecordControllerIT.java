@@ -2,6 +2,8 @@ package com.epam.courses.warehouse.rest;
 
 import com.epam.courses.warehouse.model.DealTypes;
 import com.epam.courses.warehouse.model.ProductRecord;
+import com.epam.courses.warehouse.rest.exception.CustomExceptionHandler;
+import com.epam.courses.warehouse.rest.exception.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,6 +24,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 
+import static com.epam.courses.warehouse.rest.exception.CustomExceptionHandler.PRODUCT_NOT_ENOUGH;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
@@ -34,6 +38,9 @@ class ProductRecordControllerIT {
     @Autowired
     private ProductRecordController productRecordController;
 
+    @Autowired
+    private CustomExceptionHandler customExceptionHandler;
+
     private MockMvc mockMvc;
 
     private ObjectMapper objectMapper = new ObjectMapper();
@@ -42,6 +49,7 @@ class ProductRecordControllerIT {
     public void before(){
         mockMvc = MockMvcBuilders.standaloneSetup(productRecordController)
                 .setMessageConverters(new MappingJackson2HttpMessageConverter())
+                .setControllerAdvice(customExceptionHandler)
                 .build();
     }
 
@@ -66,5 +74,28 @@ class ProductRecordControllerIT {
         Integer recordId = objectMapper.readValue(response.getContentAsString(), Integer.class);
 
         assertNotNull(recordId);
+    }
+
+    @Test
+    void shouldReturnProductNotEnoughException() throws Exception {
+        ProductRecord productRecord = new ProductRecord()
+                .setProductId(3)
+                .setDealType(DealTypes.DELIVERY)
+                .setProductRecordDate(Date.valueOf("2020-12-11"))
+                .setQuantityOfProduct(5);
+
+        MockHttpServletResponse response = mockMvc.perform(
+                MockMvcRequestBuilders.post(RECORDS_ENDPOINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(productRecord))
+        ).andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isConflict())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andReturn().getResponse();
+
+        assertNotNull(response);
+        ErrorResponse errorResponse = objectMapper.readValue(response.getContentAsString(), ErrorResponse.class);
+        assertNotNull(errorResponse);
+        assertEquals(errorResponse.getMessage(), PRODUCT_NOT_ENOUGH);
     }
 }
