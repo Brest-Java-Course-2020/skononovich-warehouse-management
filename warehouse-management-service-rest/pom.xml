@@ -15,7 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>com.epam.courses.warehouse</groupId>
-            <artifactId>warehouse-management-service-api</artifactId>
+            <artifactId>warehouse-management-model</artifactId>
         </dependency>
 
         <dependency>
