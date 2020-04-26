@@ -15,7 +15,14 @@
 
 <div align="center">
     <form action="#" th:action="@{/product}" th:object="${product}" method="post">
-        <p>Product name: <input type="text" th:field="*{productName}" /></p>
+        <p>Product name:
+            <input type="text"
+                   class="form-control"
+                   th:field="*{productName}"
+                   th:class="${#fields.hasErrors('productName')} ? 'form-control is-invalid' : 'form-control'"/></p>
+        <div th:if="${#fields.hasErrors('productName')}"
+             class="invalid-feedback"
+             th:errors="*{productName}">[errors]</div>
 
         <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
     </form>

@@ -1,6 +1,8 @@
 package com.epam.courses.warehouse.rest;
 
 import com.epam.courses.warehouse.model.Product;
+import com.epam.courses.warehouse.rest.exception.CustomExceptionHandler;
+import com.epam.courses.warehouse.rest.exception.ErrorResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +24,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static com.epam.courses.warehouse.rest.exception.CustomExceptionHandler.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"classpath:app-context-test.xml"})
@@ -36,6 +40,9 @@ public class ProductControllerIT {
     @Autowired
     private ProductController productController;
 
+    @Autowired
+    private CustomExceptionHandler customExceptionHandler;
+
     private MockMvc mockMvc;
     private ObjectMapper objectMapper = new ObjectMapper();
 
@@ -43,6 +50,7 @@ public class ProductControllerIT {
     public void before(){
         mockMvc = MockMvcBuilders.standaloneSetup(productController)
                 .setMessageConverters(new MappingJackson2HttpMessageConverter())
+                .setControllerAdvice(customExceptionHandler)
                 .build();
     }
 
@@ -54,7 +62,7 @@ public class ProductControllerIT {
     @Test
     public void shouldCreateAndGetProductById() throws Exception {
 
-        Integer productId = createProduct(TEST_PRODUCT_NAME);
+        Integer productId = createProduct(new Product().setProductName(TEST_PRODUCT_NAME));
         Product product = getProductById(productId);
 
         assertEquals(TEST_PRODUCT_NAME, product.getProductName());
@@ -63,7 +71,7 @@ public class ProductControllerIT {
     @Test
     public void shouldUpdateProduct() throws Exception {
 
-        Integer productId = createProduct(TEST_PRODUCT_NAME);
+        Integer productId = createProduct(new Product().setProductName(TEST_PRODUCT_NAME));
 
         Product product = new Product()
                 .setProductId(productId)
@@ -92,7 +100,7 @@ public class ProductControllerIT {
 
     @Test
     public void shouldDeleteProduct() throws Exception {
-        Integer productId = createProduct(TEST_PRODUCT_NAME);
+        Integer productId = createProduct(new Product().setProductName(TEST_PRODUCT_NAME));
 
         int sizeBeforeDelete = getAllProducts().size();
 
@@ -110,6 +118,56 @@ public class ProductControllerIT {
 
         assertEquals(sizeBeforeDelete, sizeAfterDelete + 1);
     }
+
+    @Test
+    public void shouldReturnProductNotFoundException() throws Exception {
+        MockHttpServletResponse response =
+                mockMvc.perform(MockMvcRequestBuilders.get("/products/999999")
+                        .accept(MediaType.APPLICATION_JSON)
+                ).andExpect(status().isNotFound())
+                        .andReturn().getResponse();
+        assertNotNull(response);
+        ErrorResponse errorResponse = objectMapper.readValue(response.getContentAsString(), ErrorResponse.class);
+        assertNotNull(errorResponse);
+        assertEquals(errorResponse.getMessage(), PRODUCT_NOT_FOUND);
+    }
+
+    @Test
+    public void shouldReturnProductIsExistException() throws Exception {
+        Product product = new Product().setProductName("TEST");
+        Product conflictProduct = new Product().setProductName(product.getProductName());
+
+        createProduct(product);
+
+        MockHttpServletResponse response = mockMvc.perform(
+                MockMvcRequestBuilders.post(PRODUCTS_ENDPOINT)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(conflictProduct))
+        ).andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isConflict())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andReturn().getResponse();
+
+        assertNotNull(response);
+        ErrorResponse errorResponse = objectMapper.readValue(response.getContentAsString(), ErrorResponse.class);
+        assertNotNull(errorResponse);
+        assertEquals(errorResponse.getMessage(), PRODUCT_IS_EXIST);
+    }
+
+    @Test
+    public void shouldFailOnDeleteProductWithRecords() throws Exception {
+        MockHttpServletResponse response = mockMvc.perform(
+                MockMvcRequestBuilders.delete(PRODUCTS_ENDPOINT + "/1")
+        ).andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isUnprocessableEntity())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andReturn().getResponse();
+
+        assertNotNull(response);
+        ErrorResponse errorResponse = objectMapper.readValue(response.getContentAsString(), ErrorResponse.class);
+        assertNotNull(errorResponse);
+        assertEquals(errorResponse.getMessage(), VALIDATION_ERROR);
+        }
 
     private List<Product> getAllProducts() throws Exception {
 
@@ -129,12 +187,12 @@ public class ProductControllerIT {
         return productList;
     }
 
-    private Integer createProduct(String productName) throws Exception {
+    private Integer createProduct(Product product) throws Exception {
 
         MockHttpServletResponse response = mockMvc.perform(
                 MockMvcRequestBuilders.post(PRODUCTS_ENDPOINT)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(new Product().setProductName(productName)))
+                        .content(objectMapper.writeValueAsString(product))
         ).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))

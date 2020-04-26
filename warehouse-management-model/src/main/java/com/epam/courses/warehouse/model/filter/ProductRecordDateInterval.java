@@ -5,12 +5,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.sql.Date;
 import java.util.Calendar;
 
-public class ProductRecordDateInterval {
+import static com.epam.courses.warehouse.model.constants.ProductRecordConstants.MINIMAL_DATE;
 
-    /**
-     * Minimal date interval.
-     */
-    private static final String MINIMAL_DATE = "2019-01-01";
+public class ProductRecordDateInterval {
 
     /**
      * The start interval for search filter.

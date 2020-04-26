@@ -15,11 +15,10 @@
 
 <div align="center">
     <form action="#"
-          id="recordForm"
-          th:id="recordForm"
-          method="post"
-          th:action="@{/record}"
-          th:object="${record}">
+          name="recordForm"
+          th:method="@{post}"
+          th:action="@{${#httpServletRequest.servletPath}}"
+          th:object="${productRecord}">
 
         <input id="field_productRecordId"
                type="hidden"
@@ -37,12 +36,29 @@
 
         <p>
         <label for="field_quantity">Quantity</label>
-        <input type="number" id="field_quantity" th:field="*{quantityOfProduct}" min="0">
+        <input type="number"
+               id="field_quantity"
+               class="form-control"
+               th:field="*{quantityOfProduct}"
+               th:class="${#fields.hasErrors('quantityOfProduct')} ? 'form-control is-invalid' : 'form-control'"
+               min="0">
         </p>
+        <div th:if="${#fields.hasErrors('quantityOfProduct')}"
+             class="invalid-feedback"
+             th:errors="*{quantityOfProduct}">[errors]</div>
+
         <p>
         <label for="field_date">Deal date</label>
-        <input type="date" id="field_date" th:field="*{productRecordDate}">
+        <input type="date"
+               id="field_date"
+               class="form-control"
+               th:field="*{productRecordDate}"
+               th:class="${#fields.hasErrors('productRecordDate')} ? 'form-control is-invalid' : 'form-control'"/>
         </p>
+        <div th:if="${#fields.hasErrors('productRecordDate')}"
+             class="invalid-feedback"
+             th:errors="*{productRecordDate}">[errors]</div>
+
         <p>
         <label for="field_dealType">Deal type</label>
             <select id="field_dealType" th:field="*{dealType}">
@@ -53,13 +69,8 @@
         </p>
         <p>
         <input type="submit" value="Submit" /> <input type="reset" value="Reset" />
-            <a th:href="@{/saveRecord}" th:onclick="@{document.forms['recordForm'].submit(); return false;}"
-               title="Create record"
-               >Save</a>
         </p>
     </form>
 </div>
-
-
 </body>
 </html>

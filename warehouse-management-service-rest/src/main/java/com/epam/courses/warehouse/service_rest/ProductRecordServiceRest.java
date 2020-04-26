@@ -1,7 +1,6 @@
 package com.epam.courses.warehouse.service_rest;
 
 import com.epam.courses.warehouse.model.ProductRecord;
-import com.epam.courses.warehouse.service.ProductRecordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
