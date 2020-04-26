@@ -6,14 +6,20 @@ import com.epam.courses.warehouse.model.filter.ProductRecordDateInterval;
 import com.epam.courses.warehouse.service_rest.ProductRecordDtoServiceRest;
 import com.epam.courses.warehouse.service_rest.ProductRecordServiceRest;
 import com.epam.courses.warehouse.service_rest.ProductServiceRest;
+import com.epam.courses.warehouse.web_app.validators.RecordValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Arrays;
 
 @Controller
@@ -25,6 +31,9 @@ public class RecordController {
     private final ProductRecordServiceRest productRecordServiceRest;
 
     private final ProductServiceRest productService;
+
+    @Autowired
+    RecordValidator recordValidator;
 
     public RecordController(ProductRecordServiceRest productRecordService,
                             ProductRecordDtoServiceRest productRecordDtoService,
@@ -59,24 +68,29 @@ public class RecordController {
     }
 
     @GetMapping(value = "/record")
-    public final String getRecordPage(Model model){
+    public String getRecordPage(Model model){
         model.addAttribute("products", productService.getAll());
         model.addAttribute("dealTypes", Arrays.asList(DealTypes.values()));
-        model.addAttribute("record", new ProductRecord().setProductRecordId(1).setDealType(DealTypes.GETTING));
+        model.addAttribute("productRecord", new ProductRecord()
+                .setProductRecordId(1)
+                .setDealType(DealTypes.GETTING)
+                .setProductRecordDate(Date.valueOf(LocalDate.now())));
 
         return "record";
     }
 
     @PostMapping(value = "/record")
-    public String createRecord(ProductRecord record) {
+    public String createRecord(@Valid ProductRecord productRecord, BindingResult result, Model model) {
+        LOGGER.debug("createRecord({}{})", productRecord, result);
+        recordValidator.validate(productRecord, result);
 
-        LOGGER.debug("createRecord({})", record);
-
-
-        productRecordServiceRest.create(record);
-
-        return "redirect:/circulation";
+        if(result.hasErrors()){
+            model.addAttribute("products", productService.getAll());
+            model.addAttribute("dealTypes", Arrays.asList(DealTypes.values()));
+            return "record";
+        } else {
+            productRecordServiceRest.create(productRecord);
+            return "redirect:/circulation";
+        }
     }
-
-
 }
