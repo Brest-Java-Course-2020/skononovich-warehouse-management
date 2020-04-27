@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.sql.Date;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.Arrays;
 
@@ -48,7 +49,7 @@ public class RecordController {
     }
 
     @GetMapping("/circulation")
-    public final String records(Model model){
+    public final String records(Model model) throws ParseException {
         LOGGER.debug("RecordController:records");
 
         ProductRecordDateInterval interval = new ProductRecordDateInterval();
@@ -73,8 +74,10 @@ public class RecordController {
             model.addAttribute("interval", interval);
             model.addAttribute("records", productRecordDtoServiceRest
                     .getAllInTimeInterval(
-                            interval.getStartInterval(),
-                            interval.getEndInterval()));
+                            new Date(interval.getStartInterval().getTime()),
+                            new Date(interval.getEndInterval().getTime())
+                    )
+            );
         }
 
         return "circulation";
