@@ -23,6 +23,13 @@
     <input type="date" name="dateFrom" id="dateFrom" th:field="*{startInterval}">
     <input type="date" name="dateTo" id="dateTo" th:field="*{endInterval}">
 
+    <div th:if="${#fields.hasErrors('startInterval')}"
+         class="invalid-feedback"
+         th:errors="*{startInterval}">[errors]</div>
+    <div th:if="${#fields.hasErrors('endInterval')}"
+         class="invalid-feedback"
+         th:errors="*{endInterval}">[errors]</div>
+
     <input type="submit" title="Filter products circulation" value="Filter">
 </form>
 </div>

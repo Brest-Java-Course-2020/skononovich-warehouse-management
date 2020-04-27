@@ -1,9 +1,11 @@
 package com.epam.courses.warehouse.model.filter;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import static com.epam.courses.warehouse.model.constants.ProductRecordConstants.MINIMAL_DATE;
 
@@ -12,13 +14,13 @@ public class ProductRecordDateInterval {
     /**
      * The start interval for search filter.
      */
-    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startInterval;
 
     /**
      * The end interval for search filter.
      */
-    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endInterval;
 
     /**
@@ -27,16 +29,17 @@ public class ProductRecordDateInterval {
      * @param startInterval start interval of registration date.
      * @param endInterval end interval of registration date.
      */
-    public ProductRecordDateInterval(String startInterval, String endInterval) {
-        this.startInterval = Date.valueOf(startInterval);
-        this.endInterval = Date.valueOf(endInterval);
+    public ProductRecordDateInterval(Date startInterval, Date endInterval) {
+        this.startInterval = startInterval;
+        this.endInterval = endInterval;
     }
 
     /**
      * Constructor with default date interval parameters.
      */
-    public ProductRecordDateInterval() {
-        this.startInterval = Date.valueOf(MINIMAL_DATE);
+    public ProductRecordDateInterval() throws ParseException {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        this.startInterval = simpleDateFormat.parse(MINIMAL_DATE);
         this.endInterval = new Date(Calendar.getInstance().getTime().getTime());
     }
 
