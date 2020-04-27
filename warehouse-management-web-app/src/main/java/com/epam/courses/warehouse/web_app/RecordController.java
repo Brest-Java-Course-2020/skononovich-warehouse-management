@@ -6,6 +6,7 @@ import com.epam.courses.warehouse.model.filter.ProductRecordDateInterval;
 import com.epam.courses.warehouse.service_rest.ProductRecordDtoServiceRest;
 import com.epam.courses.warehouse.service_rest.ProductRecordServiceRest;
 import com.epam.courses.warehouse.service_rest.ProductServiceRest;
+import com.epam.courses.warehouse.web_app.validators.ProductRecordDateIntervalValidator;
 import com.epam.courses.warehouse.web_app.validators.RecordValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +36,9 @@ public class RecordController {
     @Autowired
     RecordValidator recordValidator;
 
+    @Autowired
+    ProductRecordDateIntervalValidator productRecordDateIntervalValidator;
+
     public RecordController(ProductRecordServiceRest productRecordService,
                             ProductRecordDtoServiceRest productRecordDtoService,
                             ProductServiceRest productService){
@@ -56,14 +60,23 @@ public class RecordController {
 
     @GetMapping("/filter")
     public final String filterRecords(
-            @ModelAttribute("interval") ProductRecordDateInterval interval,
+            @Valid @ModelAttribute("interval") ProductRecordDateInterval interval,
+            BindingResult result,
             Model model) {
+        LOGGER.debug("filterRecords({},{})", interval, result);
 
-        model.addAttribute("interval", interval);
-        model.addAttribute("records", productRecordDtoServiceRest
-                .getAllInTimeInterval(
-                interval.getStartInterval(),
-                interval.getEndInterval()));
+
+        productRecordDateIntervalValidator.validate(interval, result);
+        if(result.hasErrors()){
+            model.addAttribute("records", productRecordDtoServiceRest.getAll());
+        } else {
+            model.addAttribute("interval", interval);
+            model.addAttribute("records", productRecordDtoServiceRest
+                    .getAllInTimeInterval(
+                            interval.getStartInterval(),
+                            interval.getEndInterval()));
+        }
+
         return "circulation";
     }
 
