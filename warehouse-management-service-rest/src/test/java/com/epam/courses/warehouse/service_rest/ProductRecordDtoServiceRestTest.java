@@ -1,13 +1,13 @@
 package com.epam.courses.warehouse.service_rest;
 
 import com.epam.courses.warehouse.model.DealTypes;
+import com.epam.courses.warehouse.model.Product;
 import com.epam.courses.warehouse.model.dto.ProductRecordDTO;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -19,12 +19,13 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Date;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -33,7 +34,6 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(value = {"classpath:app-context-test.xml"})
 class ProductRecordDtoServiceRestTest {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProductRecordDtoServiceRestTest.class);
 
     private String URL = "http://localhost:8088/records_dtos";
 
@@ -78,6 +78,37 @@ class ProductRecordDtoServiceRestTest {
 
         assertNotNull(productRecords);
         assertEquals(2, productRecords.size());
+    }
+
+
+    @Test
+    public void shouldGetTrueIfProductExist() throws URISyntaxException, JsonProcessingException {
+        ProductRecordDTO productRecordDTO = create(5);
+        mockServer.expect(ExpectedCount.once(), requestTo(new URI(URL)))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withStatus(HttpStatus.OK)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(mapper.writeValueAsString(Collections.singletonList(productRecordDTO)))
+                );
+        Product product = new Product().setProductName(productRecordDTO.getProductName());
+
+        boolean response = productRecordDtoServiceRest.productRecordExist(product);
+        assertTrue(response);
+    }
+
+    @Test
+    public void shouldGetFalseIfProductNotExist() throws URISyntaxException, JsonProcessingException {
+        ProductRecordDTO productRecordDTO = create(5);
+        mockServer.expect(ExpectedCount.once(), requestTo(new URI(URL)))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withStatus(HttpStatus.OK)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(mapper.writeValueAsString(Collections.singletonList(productRecordDTO)))
+                );
+        Product product = new Product().setProductName("Non exist product name");
+
+        boolean response = productRecordDtoServiceRest.productRecordExist(product);
+        assertFalse(response);
     }
 
     private ProductRecordDTO create(int index) {
