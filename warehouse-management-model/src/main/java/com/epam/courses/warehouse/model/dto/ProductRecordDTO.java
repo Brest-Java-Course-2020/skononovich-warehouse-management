@@ -93,7 +93,10 @@ public class ProductRecordDTO {
          * @return dealDate deal date.
          */
         public Date getDealDate() {
-            return dealDate;
+            if(this.dealDate == null){
+                return null;
+            }
+            return new Date(dealDate.getTime());
         }
 
         /**
@@ -102,8 +105,13 @@ public class ProductRecordDTO {
          * @return this ProductRecordDTO.
          */
         public ProductRecordDTO setDealDate(Date dealDate) {
-            this.dealDate = dealDate;
-            return this;
+            if(dealDate == null){
+                this.dealDate = null;
+                return this;
+            } else {
+                this.dealDate = new Date(dealDate.getTime());
+                return this;
+            }
         }
 
         /**

@@ -93,7 +93,10 @@ public class ProductRecord {
      * @return productRecordDate product record date.
      */
     public Date getProductRecordDate() {
-        return productRecordDate;
+        if(this.productRecordDate == null){
+            return null;
+        }
+        return new Date(productRecordDate.getTime());
     }
 
     /**
@@ -102,8 +105,13 @@ public class ProductRecord {
      * @return this ProductRecord.
      */
     public ProductRecord setProductRecordDate(Date productRecordDate) {
-        this.productRecordDate = productRecordDate;
-        return this;
+        if(productRecordDate == null){
+            this.productRecordDate = null;
+            return this;
+        } else {
+            this.productRecordDate = new Date(productRecordDate.getTime());
+            return this;
+        }
     }
 
     /**
