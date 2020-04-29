@@ -14,6 +14,8 @@ import java.util.List;
 public class ProductDtoServiceRest {
     private static final Logger LOOGER = LoggerFactory.getLogger(ProductDtoServiceRest.class);
 
+    private static final TypeReference<List<ProductDto>> TYPE_REFERENCE = new TypeReference<List<ProductDto>>(){};
+
     private String url;
 
     private RestTemplate restTemplate;
@@ -29,8 +31,7 @@ public class ProductDtoServiceRest {
         LOOGER.debug("ProductDtoServiceRest:getAllProductsWithSummaryCount");
 
         ResponseEntity responseEntity = restTemplate.getForEntity(url, List.class);
-        return objectMapper.convertValue(responseEntity.getBody(),
-                new TypeReference<List<ProductDto>>(){});
+        return objectMapper.convertValue(responseEntity.getBody(), TYPE_REFERENCE);
     }
 
     public boolean enoughProducts(ProductRecord productRecord){

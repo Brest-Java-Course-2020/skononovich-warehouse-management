@@ -7,7 +7,7 @@ public enum DealTypes {
     GETTING(0), DELIVERY(1);
     private int value;
 
-    private DealTypes(int value){
+    DealTypes(int value){
         this.value = value;
     }
 

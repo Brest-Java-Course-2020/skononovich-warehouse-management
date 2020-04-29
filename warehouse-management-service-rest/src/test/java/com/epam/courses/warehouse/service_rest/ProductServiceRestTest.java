@@ -1,6 +1,7 @@
 package com.epam.courses.warehouse.service_rest;
 
 import com.epam.courses.warehouse.model.Product;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,12 +17,13 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withStatus;
@@ -124,6 +126,35 @@ class ProductServiceRestTest {
         int result = productServiceRest.delete(id);
 
         assertEquals(1, result);
+    }
+
+    @Test
+    public void shouldGetTrueIfProductExist() throws URISyntaxException, JsonProcessingException {
+        Product product = create(5);
+        mockServer.expect(ExpectedCount.once(), requestTo(new URI(URL)))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withStatus(HttpStatus.OK)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(mapper.writeValueAsString(Collections.singletonList(product)))
+                );
+
+        boolean response = productServiceRest.productExist(product);
+        assertTrue(response);
+    }
+
+    @Test
+    public void shouldGetFalseIfProductNotExist() throws URISyntaxException, JsonProcessingException {
+        Product product = create(5);
+        mockServer.expect(ExpectedCount.once(), requestTo(new URI(URL)))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withStatus(HttpStatus.OK)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(mapper.writeValueAsString(Collections.singletonList(product)))
+                );
+        Product nonExistProduct = new Product().setProductName("Non exist product name");
+
+        boolean response = productServiceRest.productExist(nonExistProduct);
+        assertFalse(response);
     }
 
     private Product create(int index) {

@@ -30,8 +30,16 @@ public class ProductRecordDateInterval {
      * @param endInterval end interval of registration date.
      */
     public ProductRecordDateInterval(Date startInterval, Date endInterval) {
-        this.startInterval = startInterval;
-        this.endInterval = endInterval;
+        if(startInterval == null){
+            this.startInterval = null;
+        } else {
+            this.startInterval = new Date(startInterval.getTime());
+        }
+        if(endInterval == null){
+            this.endInterval = null;
+        } else {
+            this.endInterval = new Date(endInterval.getTime());
+        }
     }
 
     /**
@@ -47,23 +55,33 @@ public class ProductRecordDateInterval {
      * @return Returns the start interval for search filter.
      */
     public Date getStartInterval() {
-        return startInterval;
+        if(this.startInterval == null){
+            return null;
+        }
+        return new Date(startInterval.getTime());
     }
 
     /**
-     * Sets the start interval of for search filter to the <code>regStartInterval</code>.
+     * Sets the start interval of for search filter to the <code>startInterval</code>.
      *
      * @param startInterval the new start interval for search filter.
      */
     public void setStartInterval(Date startInterval) {
-        this.startInterval = startInterval;
+        if(startInterval == null){
+            this.startInterval = null;
+        } else {
+            this.startInterval = new Date(startInterval.getTime());
+        }
     }
 
     /**
      * @return Returns the end interval for search filter.
      */
     public Date getEndInterval() {
-        return endInterval;
+        if(this.endInterval == null){
+            return null;
+        }
+        return new Date(endInterval.getTime());
     }
 
     /**
@@ -72,7 +90,11 @@ public class ProductRecordDateInterval {
      * @param endInterval the new end interval for search filter.
      */
     public void setEndInterval(Date endInterval) {
-        this.endInterval = endInterval;
+        if(endInterval == null){
+            this.endInterval = null;
+        } else {
+            this.endInterval = new Date(endInterval.getTime());
+        }
     }
 
     /**

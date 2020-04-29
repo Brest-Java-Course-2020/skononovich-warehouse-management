@@ -14,7 +14,9 @@ import java.util.Optional;
 
 public class ProductServiceRest {
 
-    private Logger LOGGER = LoggerFactory.getLogger(ProductServiceRest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProductServiceRest.class);
+
+    private static final TypeReference<List<Product>> TYPE_REFERENCE = new TypeReference<List<Product>>(){};
 
     private String url;
 
@@ -38,7 +40,7 @@ public class ProductServiceRest {
         LOGGER.debug("ProductServiceRest:getAll()");
 
         ResponseEntity responseEntity = restTemplate.getForEntity(url, List.class);
-        return objectMapper.convertValue(responseEntity.getBody(), new TypeReference<List<Product>>(){});
+        return objectMapper.convertValue(responseEntity.getBody(), TYPE_REFERENCE);
     }
 
     public Optional<Product> getById(Integer productId) {

@@ -16,6 +16,9 @@ public class ProductRecordDtoServiceRest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductRecordDtoServiceRest.class);
 
+    private static final TypeReference<List<ProductRecordDTO>> TYPE_REFERENCE =
+            new TypeReference<List<ProductRecordDTO>>() {};
+
     private String url;
 
     private RestTemplate restTemplate;
@@ -31,8 +34,7 @@ public class ProductRecordDtoServiceRest {
         LOGGER.debug("ProductRecordDtoServiceRest:getAll");
 
         ResponseEntity responseEntity = restTemplate.getForEntity(url, List.class);
-        return objectMapper.convertValue(responseEntity.getBody(),
-                new TypeReference<List<ProductRecordDTO>>(){});
+        return objectMapper.convertValue(responseEntity.getBody(), TYPE_REFERENCE);
     }
 
     public List<ProductRecordDTO> getAllInTimeInterval(Date from, Date by) {
@@ -43,8 +45,7 @@ public class ProductRecordDtoServiceRest {
         dates[1] = by;
 
         ResponseEntity responseEntity = restTemplate.postForEntity(url, dates, List.class);
-        return objectMapper.convertValue(responseEntity.getBody(),
-                new TypeReference<List<ProductRecordDTO>>(){});
+        return objectMapper.convertValue(responseEntity.getBody(), TYPE_REFERENCE);
     }
 
     public boolean productRecordExist(Product product){
