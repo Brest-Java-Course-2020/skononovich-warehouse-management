@@ -91,3 +91,17 @@ Try CURL:
         
         Get all product records with product name in date interval:
         curl -s -X GET 'http://localhost:8088/records_dtos?startDate=2019-01-01&endDate=2020-01-01' | json_pp
+        
+#### Use embedded jetty server for WEB RESTful application test
+You need to run these commands in different tabs or terminal windows:
+        
+        $ mvn -pl warehouse-management-rest/ jetty:run
+
+        $ mvn -pl warehouse-management-web-app/ jetty:run
+
+   Once started, the application should be available at:
+
+        http://localhost:8090
+
+   if you wanna shutdown jetty server, go to terminal tab or window
+   you wanna stop and press "CTRL+C".
