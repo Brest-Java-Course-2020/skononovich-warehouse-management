@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>warehouse-management-rest</artifactId>
+    <artifactId>rest</artifactId>
     <packaging>war</packaging>
 
     <dependencies>
@@ -104,16 +104,6 @@
             <artifactId>junit-jupiter-api</artifactId>
             <scope>compile</scope>
         </dependency>
-
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-        </dependency>
-
     </dependencies>
 
     <build>
