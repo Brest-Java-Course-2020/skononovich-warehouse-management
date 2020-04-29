@@ -94,7 +94,56 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+
+        <profile>
+            <id>tomcat</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>wm</name>
+                    <value>tomcat</value>
+                </property>
+            </activation>
+            <properties>
+                <port>8080</port>
+                <point.products>rest-warehouse-management/products</point.products>
+                <point.products_dtos>rest-warehouse-management/products_dtos</point.products_dtos>
+                <point.records>rest-warehouse-management/records</point.records>
+                <point.records_dtos>rest-warehouse-management/records_dtos</point.records_dtos>
+            </properties>
+
+        </profile>
+
+        <profile>
+            <id>jetty</id>
+            <activation>
+                <property>
+                    <name>wm</name>
+                    <value>jetty</value>
+                </property>
+            </activation>
+            <properties>
+                <port>8088</port>
+                <point.products>products</point.products>
+                <point.products_dtos>products_dtos</point.products_dtos>
+                <point.records>records</point.records>
+                <point.records_dtos>records_dtos</point.records_dtos>
+            </properties>
+        </profile>
+
+    </profiles>
+
     <build>
+        <finalName>warehouse</finalName>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <plugins>
             <!-- Embedded Jetty HTTP Server for testing web application -->
             <plugin>

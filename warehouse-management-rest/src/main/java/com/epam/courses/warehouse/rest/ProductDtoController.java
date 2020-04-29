@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
 
+/**
+ * ProductDto Rest controller.
+ */
 @RestController
 public class ProductDtoController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductDtoController.class);
@@ -19,6 +22,10 @@ public class ProductDtoController {
         this.productDtoService = productDtoService;
     }
 
+    /**
+     * Get all products with product quantity.
+     * @return <code>ProductDto</code> collection.
+     */
     @GetMapping(value = "/products_dtos")
     public Collection<ProductDto> products(){
         LOGGER.debug("ProductController:products");

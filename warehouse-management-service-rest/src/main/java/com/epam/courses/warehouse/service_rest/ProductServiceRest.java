@@ -12,6 +12,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Product service for web app.
+ */
 public class ProductServiceRest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductServiceRest.class);
@@ -29,6 +32,11 @@ public class ProductServiceRest {
         this.restTemplate = restTemplate;
     }
 
+    /**
+     * Create Product.
+     * @param product Product.
+     * @return Product id.
+     */
     public Integer create(Product product) {
         LOGGER.debug("ProductServiceRest:create({})", product);
 
@@ -36,6 +44,10 @@ public class ProductServiceRest {
         return responseEntity.getBody();
     }
 
+    /**
+     * Get all products.
+     * @return <code>Product</code> list.
+     */
     public List<Product> getAll() {
         LOGGER.debug("ProductServiceRest:getAll()");
 
@@ -43,6 +55,11 @@ public class ProductServiceRest {
         return objectMapper.convertValue(responseEntity.getBody(), TYPE_REFERENCE);
     }
 
+    /**
+     * Get <code>Product</code> by id.
+     * @param productId product id.
+     * @return <code>Product</code>.
+     */
     public Optional<Product> getById(Integer productId) {
         LOGGER.debug("ProductServiceRest:findById({})", productId);
 
@@ -51,6 +68,11 @@ public class ProductServiceRest {
         return Optional.ofNullable(responseEntity.getBody());
     }
 
+    /**
+     * Update product.
+     * @param product Product.
+     * @return Number of updated records.
+     */
     public Integer update(Product product) {
         LOGGER.debug("ProductServiceRest:update({})", product);
 
@@ -61,6 +83,11 @@ public class ProductServiceRest {
         return result.getBody();
     }
 
+    /**
+     * Delete Product.
+     * @param productId product id.
+     * @return number of updated records.
+     */
     public Integer delete(Integer productId) {
         LOGGER.debug("ProductServiceRest:delete({})", productId);
 
@@ -72,6 +99,11 @@ public class ProductServiceRest {
         return result.getBody();
     }
 
+    /**
+     * Check exist product or not.
+     * @param prod Product.
+     * @return true if product exist.
+     */
     public boolean productExist(Product prod){
         List<Product> products = getAll();
 

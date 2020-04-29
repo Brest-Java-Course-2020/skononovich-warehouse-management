@@ -11,6 +11,9 @@ import org.springframework.validation.Validator;
 
 import static com.epam.courses.warehouse.model.constants.ProductConstants.PRODUCT_NAME_SIZE;
 
+/**
+ * Validator for Product controller.
+ */
 @Component
 public class ProductValidator implements Validator {
 

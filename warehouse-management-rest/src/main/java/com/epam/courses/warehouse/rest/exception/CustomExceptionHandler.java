@@ -12,6 +12,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Custom exception handler.
+ */
 @ControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     public static final String PRODUCT_NOT_FOUND = "product.not_found";

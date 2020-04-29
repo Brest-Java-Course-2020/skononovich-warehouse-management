@@ -11,6 +11,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
+/**
+ * ProductDto service for web app.
+ */
 public class ProductDtoServiceRest {
     private static final Logger LOOGER = LoggerFactory.getLogger(ProductDtoServiceRest.class);
 
@@ -27,6 +30,10 @@ public class ProductDtoServiceRest {
         this.restTemplate = restTemplate;
     }
 
+    /**
+     * Get all products with product quantity.
+     * @return <code>ProductDto</code> list.
+     */
     public List<ProductDto> getAllProductsWithSummaryCount() {
         LOOGER.debug("ProductDtoServiceRest:getAllProductsWithSummaryCount");
 
@@ -34,6 +41,11 @@ public class ProductDtoServiceRest {
         return objectMapper.convertValue(responseEntity.getBody(), TYPE_REFERENCE);
     }
 
+    /**
+     * Check enough products in warehouse or not.
+     * @param productRecord ProductRecord with product quantity.
+     * @return boolean.
+     */
     public boolean enoughProducts(ProductRecord productRecord){
         List<ProductDto> productDtoList = getAllProductsWithSummaryCount();
 

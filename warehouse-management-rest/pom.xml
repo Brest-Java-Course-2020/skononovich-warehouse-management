@@ -107,6 +107,9 @@
     </dependencies>
 
     <build>
+
+        <finalName>rest-warehouse-management</finalName>
+
         <plugins>
             <!-- Embedded Jetty HTTP Server for testing web application -->
             <plugin>

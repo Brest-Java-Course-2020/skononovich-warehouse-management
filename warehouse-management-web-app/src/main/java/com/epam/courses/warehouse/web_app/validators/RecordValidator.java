@@ -13,6 +13,9 @@ import java.time.LocalDate;
 
 import static com.epam.courses.warehouse.model.constants.ProductRecordConstants.MINIMAL_DATE;
 
+/**
+ * Validator for Record controller.
+ */
 @Component
 public class RecordValidator implements Validator {
 

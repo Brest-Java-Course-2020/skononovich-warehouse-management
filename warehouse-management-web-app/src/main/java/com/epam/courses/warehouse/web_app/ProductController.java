@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import java.util.Optional;
 
+/**
+ * Product web controller.
+ */
 @Controller
 public class ProductController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
@@ -33,6 +36,11 @@ public class ProductController {
         this.productDtoService = productDtoService;
     }
 
+    /**
+     * Go to products list page.
+     * @param model Model.
+     * @return View name.
+     */
     @GetMapping("/products")
     public final String products(Model model){
         LOGGER.debug("ProductController:products");
@@ -41,6 +49,12 @@ public class ProductController {
         return "products";
     }
 
+    /**
+     * Go to product page.
+     * @param id Product id.
+     * @param model Model.
+     * @return View name.
+     */
     @GetMapping(value = "/product/{id}")
     public final String goToProductPage(@PathVariable Integer id, Model model){
     LOGGER.debug("goToProductPage({}, {})", id, model );
@@ -51,7 +65,6 @@ public class ProductController {
         model.addAttribute("product", productOptional.get());
         return "updateProduct";
     } else {
-        // TODO department not found - pass error message as parameter or handle not found error
         return "redirect:products";
     }
     }

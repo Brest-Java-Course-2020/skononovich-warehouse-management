@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
 
+/**
+ * ProductRecord Rest controller.
+ */
 @RestController
 public class ProductRecordController {
     public static final String PRODUCT_NOT_ENOUGH = "product.not_enough";
@@ -26,6 +29,11 @@ public class ProductRecordController {
         this.productRecordService = service;
     }
 
+    /**
+     * Create ProductRecord.
+     * @param productRecord ProductRecord.
+     * @return <code>ResponseEntity</code>
+     */
     @PostMapping(value = "/records",  consumes = "application/json", produces = "application/json")
     public ResponseEntity create(@RequestBody ProductRecord productRecord){
         LOGGER.debug("ProductRecordController:create");
