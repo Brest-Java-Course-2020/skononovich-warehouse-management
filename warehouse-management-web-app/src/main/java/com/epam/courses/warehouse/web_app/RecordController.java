@@ -48,6 +48,12 @@ public class RecordController {
         this.productService = productService;
     }
 
+    /**
+     * Go to product circulation page.
+     * @param model Model.
+     * @return View name.
+     * @throws ParseException
+     */
     @GetMapping("/circulation")
     public final String records(Model model) throws ParseException {
         LOGGER.debug("RecordController:records");
@@ -59,6 +65,13 @@ public class RecordController {
         return "circulation";
     }
 
+    /**
+     * Go to product circulation page
+     * @param interval <code>ProductRecordDateInterval</code>.
+     * @param result <code>BindingResult</code>.
+     * @param model <code>Model</code>.
+     * @return View name.
+     */
     @GetMapping("/filter")
     public final String filterRecords(
             @Valid @ModelAttribute("interval") ProductRecordDateInterval interval,
@@ -83,6 +96,11 @@ public class RecordController {
         return "circulation";
     }
 
+    /**
+     * Go to product records page.
+     * @param model Model.
+     * @return View name.
+     */
     @GetMapping(value = "/record")
     public String getRecordPage(Model model){
         model.addAttribute("products", productService.getAll());
@@ -95,6 +113,13 @@ public class RecordController {
         return "record";
     }
 
+    /**
+     * Go to create product record page.
+     * @param productRecord <code>ProductRecord</code>.
+     * @param result <code>BindingResult</code>.
+     * @param model <code>Model</code>.
+     * @return View name.
+     */
     @PostMapping(value = "/record")
     public String createRecord(@Valid ProductRecord productRecord, BindingResult result, Model model) {
         LOGGER.debug("createRecord({}{})", productRecord, result);

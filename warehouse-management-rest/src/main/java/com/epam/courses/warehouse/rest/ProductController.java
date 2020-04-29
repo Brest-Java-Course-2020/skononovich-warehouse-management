@@ -13,6 +13,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 
+/**
+ * Product Rest controller.
+ */
 @RestController
 public class ProductController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
@@ -25,6 +28,10 @@ public class ProductController {
         this.productService = productService;
     }
 
+    /**
+     * Get all products.
+     * @return <code>Product</code> collection.
+     */
     @GetMapping(value = "/products")
     public Collection<Product> getAll(){
         LOGGER.debug("ProductController:getAll");
@@ -32,6 +39,11 @@ public class ProductController {
         return productService.getAll();
     }
 
+    /**
+     * Get product by id.
+     * @param id product id.
+     * @return <code>ResponseEntity</code>
+     */
     @GetMapping(value = "/products/{id}")
     public ResponseEntity<Product> findById(@PathVariable Integer id){
         LOGGER.debug("ProductController:getById id = " + id);
@@ -45,6 +57,11 @@ public class ProductController {
                 HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * Create product.
+     * @param product Product.
+     * @return <code>ResponseEntity</code>
+     */
     @PostMapping(path = "/products", consumes = "application/json", produces = "application/json")
     public ResponseEntity create(@RequestBody Product product){
         LOGGER.debug("ProductController:create");
@@ -60,6 +77,11 @@ public class ProductController {
         }
     }
 
+    /**
+     * Update product.
+     * @param product Product.
+     * @return <code>ResponseEntity</code>
+     */
     @PutMapping(path = "/products", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Integer> update(@RequestBody Product product){
         LOGGER.debug("ProductController:update");
@@ -68,6 +90,11 @@ public class ProductController {
         return new ResponseEntity<>(numberOfUpdatedRecords, HttpStatus.OK);
     }
 
+    /**
+     * Delete product.
+     * @param id product id.
+     * @return <code>ResponseEntity</code>
+     */
     @DeleteMapping(value = "/products/{id}", produces = "application/json")
     public ResponseEntity<Integer> delete(@PathVariable Integer id){
         LOGGER.debug("ProductController:delete");

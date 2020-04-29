@@ -12,6 +12,9 @@ import org.springframework.web.client.RestTemplate;
 import java.sql.Date;
 import java.util.List;
 
+/**
+ * ProductRecordDto service for web app.
+ */
 public class ProductRecordDtoServiceRest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductRecordDtoServiceRest.class);
@@ -30,6 +33,10 @@ public class ProductRecordDtoServiceRest {
         this.restTemplate = restTemplate;
     }
 
+    /**
+     * Get all ProductRecords with product name.
+     * @return <code>ProductRecordDTO</code> list.
+     */
     public List<ProductRecordDTO> getAll() {
         LOGGER.debug("ProductRecordDtoServiceRest:getAll");
 
@@ -37,6 +44,12 @@ public class ProductRecordDtoServiceRest {
         return objectMapper.convertValue(responseEntity.getBody(), TYPE_REFERENCE);
     }
 
+    /**
+     * Get all ProductRecords with product name in time interval.
+     * @param from from <code>Date</code>.
+     * @param by by <code>Date</code>
+     * @return <code>ProductRecordDTO</code> list.
+     */
     public List<ProductRecordDTO> getAllInTimeInterval(Date from, Date by) {
         LOGGER.debug("ProductRecordDtoServiceRest:getAll");
 
@@ -48,6 +61,11 @@ public class ProductRecordDtoServiceRest {
         return objectMapper.convertValue(responseEntity.getBody(), TYPE_REFERENCE);
     }
 
+    /**
+     * Check exist product records for <code>Product</code> or not.
+     * @param product Product.
+     * @return boolean.
+     */
     public boolean productRecordExist(Product product){
         List<ProductRecordDTO> productRecordDTOS = getAll();
 

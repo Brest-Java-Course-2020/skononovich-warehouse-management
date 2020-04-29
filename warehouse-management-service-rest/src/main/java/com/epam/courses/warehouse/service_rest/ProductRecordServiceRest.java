@@ -6,6 +6,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * ProductRecord service for web app.
+ */
 public class ProductRecordServiceRest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductRecordServiceRest.class);
@@ -19,6 +22,11 @@ public class ProductRecordServiceRest {
         this.restTemplate = restTemplate;
     }
 
+    /**
+     * Create product record.
+     * @param productRecord ProductRecord.
+     * @return productRecord id.
+     */
     public Integer create(ProductRecord productRecord) {
         LOGGER.debug("ProductRecordServiceRest:create");
 
