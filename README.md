@@ -47,6 +47,44 @@ check for reports:
         
         ../<project>/target/site/index.html
 
+#### Use tomcat server for WEB RESTful application test
+   After project was build you can go to:
+   
+        http://localhost:8080/manager/html/
+        
+   and choose .war files for deploy web-app, rest-app in deploy section. 
+   
+   Another way to do this for web-app go to: 
+        
+        ../<project>/web-app/target/
+        
+   and copy "warehouse.war" to tomcat /webapps directory
+        
+        ../tomcat/webapps/
+        
+   for rest-app go to:
+          
+        ../<project>/rest/target/
+          
+   and copy "rest-warehouse-management.war" to tomcat /webapps directory
+          
+        ../tomcat/webapps/
+        
+   the web application should be available at:
+        
+         http://localhost:8080/warehouse/
+         
+   if you wanna shutdown or stop tomcat server go to:
+   
+        http://localhost:8080/manager/html/
+   
+   choose app click to "undeploy" for shutdown and removing, or click to "stop" for stopping app.
+   Also you can remove rest-warehouse-management.war, warehouse.war files from:
+        
+        ../tomcat/webapps/
+        
+   for shutdown and removing this apps from tomcat server.
+
 #### Use embedded jetty server for REST application test
    Run terminal command in project directory:
 
