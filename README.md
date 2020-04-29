@@ -37,16 +37,6 @@ Run terminal command in project directory:
 
         $ mvn clean install
 
-#### Preparing reports
-
-        $ mvn site
-
-        $ mvn site:site        
-
-check for reports: 
-        
-        ../<project>/target/site/index.html
-
 #### Use tomcat server for WEB RESTful application test
    After project was build you can go to:
    
