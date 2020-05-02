@@ -10,23 +10,46 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * MySQL implementation of ProductDtoDAO interface.
+ */
 @Repository
 public class ProductDtoDAOJdbcMsql implements ProductDtoDao {
-    private Logger LOGGER = LoggerFactory.getLogger(ProductDtoDAOJdbcMsql.class);
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER
+            = LoggerFactory.getLogger(ProductDtoDAOJdbcMsql.class);
 
+    /**
+     * SQL script get all products with summary count.
+     */
     @Value("${productDto.getAllWithSummaryCount}")
     private String sqlGetAllWithSummaryCount;
 
-    NamedParameterJdbcTemplate jdbcTemplate;
+    /**
+     * Jdbc template.
+     */
+    private NamedParameterJdbcTemplate jdbcTemplate;
 
-    public ProductDtoDAOJdbcMsql(NamedParameterJdbcTemplate namedParameterJdbcTemplate){
+    /**
+     * Default constructor.
+     * @param namedParameterJdbcTemplate jdbc template.
+     */
+    public ProductDtoDAOJdbcMsql(
+            final NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.jdbcTemplate = namedParameterJdbcTemplate;
     }
 
+    /**
+     * {@inheritDoc}
+     * @return ProductDto list.
+     */
     @Override
-    public List<ProductDto> getAllProductsWithSummaryCount() {
+    public final List<ProductDto> getAllProductsWithSummaryCount() {
         LOGGER.debug("ProductDtoDAOJdbcMsql:getAllProductsWithSummaryCount");
 
-        return jdbcTemplate.query(sqlGetAllWithSummaryCount, BeanPropertyRowMapper.newInstance(ProductDto.class));
+        return jdbcTemplate.query(sqlGetAllWithSummaryCount,
+                BeanPropertyRowMapper.newInstance(ProductDto.class));
     }
 }

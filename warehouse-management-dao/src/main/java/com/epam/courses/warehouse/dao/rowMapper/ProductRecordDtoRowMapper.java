@@ -7,15 +7,22 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ProductRecordDtoRowMapper implements RowMapper<ProductRecordDTO> {
+/**
+ * Row mapper for ProductRecordDto.
+ */
+public final class ProductRecordDtoRowMapper
+        implements RowMapper<ProductRecordDTO> {
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public ProductRecordDTO mapRow(ResultSet resultSet, int i) throws SQLException {
-        ProductRecordDTO productRecordDTO = new ProductRecordDTO()
+    public ProductRecordDTO mapRow(final ResultSet resultSet, final int i)
+            throws SQLException {
+        return new ProductRecordDTO()
                 .setRecordId(resultSet.getInt("record_id"))
                 .setProductName(resultSet.getString("product_name"))
                 .setQuantityOfProduct(resultSet.getInt("quantity"))
                 .setDealDate(resultSet.getDate("deal_date"))
                 .setDealType(DealTypes.fromInt(resultSet.getInt("deal_type")));
-        return productRecordDTO;
     }
 }
