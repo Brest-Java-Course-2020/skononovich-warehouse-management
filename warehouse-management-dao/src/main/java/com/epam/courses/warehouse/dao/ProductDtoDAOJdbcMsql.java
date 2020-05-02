@@ -37,7 +37,7 @@ public class ProductDtoDAOJdbcMsql implements ProductDtoDao {
      * @param namedParameterJdbcTemplate jdbc template.
      */
     public ProductDtoDAOJdbcMsql(
-            final NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+            NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.jdbcTemplate = namedParameterJdbcTemplate;
     }
 
@@ -46,7 +46,7 @@ public class ProductDtoDAOJdbcMsql implements ProductDtoDao {
      * @return ProductDto list.
      */
     @Override
-    public final List<ProductDto> getAllProductsWithSummaryCount() {
+    public List<ProductDto> getAllProductsWithSummaryCount() {
         LOGGER.debug("ProductDtoDAOJdbcMsql:getAllProductsWithSummaryCount");
 
         return jdbcTemplate.query(sqlGetAllWithSummaryCount,

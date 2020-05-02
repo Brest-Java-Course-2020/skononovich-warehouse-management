@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * ProductRecord service implementation.
  */
 @Service
-public final class ProductRecordServiceImpl implements ProductRecordService {
+public class ProductRecordServiceImpl implements ProductRecordService {
 
     /**
      * Logger.

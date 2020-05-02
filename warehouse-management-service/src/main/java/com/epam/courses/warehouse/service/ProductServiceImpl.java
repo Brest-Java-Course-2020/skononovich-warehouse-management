@@ -13,7 +13,7 @@ import java.util.Optional;
  * Product service implementation.
  */
 @Service
-public final class ProductServiceImpl implements ProductService {
+public class ProductServiceImpl implements ProductService {
 
     /**
      * Logger.

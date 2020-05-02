@@ -16,7 +16,7 @@ import java.util.Objects;
  * MySQL implementation of ProductRecordDAO.
  */
 @Repository
-public final class ProductRecordDAOJdbcMsql implements ProductRecordDAO {
+public class ProductRecordDAOJdbcMsql implements ProductRecordDAO {
 
     /**
      * Logger.

@@ -16,7 +16,7 @@ import java.util.List;
  * MySQL implementation ProductRecordDtoDAO interface.
  */
 @Repository
-public final class ProductRecordDtoDAOJdbcMsql implements ProductRecordDtoDAO {
+public class ProductRecordDtoDAOJdbcMsql implements ProductRecordDtoDAO {
 
     /**
      * Logger.

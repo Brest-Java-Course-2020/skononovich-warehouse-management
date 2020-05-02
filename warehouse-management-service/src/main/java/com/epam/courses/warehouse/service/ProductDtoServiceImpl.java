@@ -13,7 +13,7 @@ import java.util.List;
  * ProductDto service implementation.
  */
 @Service
-public final class ProductDtoServiceImpl implements ProductDtoService {
+public class ProductDtoServiceImpl implements ProductDtoService {
     /**
      * Logger.
      */

@@ -14,7 +14,7 @@ import java.util.List;
  * ProductRecordDto service implementation.
  */
 @Service
-public final class ProductRecordDtoServiceImpl
+public class ProductRecordDtoServiceImpl
         implements ProductRecordDtoService {
 
     /**
