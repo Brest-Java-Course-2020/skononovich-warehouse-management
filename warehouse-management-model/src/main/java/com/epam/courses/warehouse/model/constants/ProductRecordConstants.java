@@ -1,6 +1,17 @@
 package com.epam.courses.warehouse.model.constants;
 
-public class ProductRecordConstants {
+/**
+ * ProductRecord constants.
+ */
+public final class ProductRecordConstants {
+
+    /**
+     * Prohibition of creating an instance of a class.
+     */
+    private ProductRecordConstants() {
+
+    }
+
     /**
      * Minimal date interval.
      */

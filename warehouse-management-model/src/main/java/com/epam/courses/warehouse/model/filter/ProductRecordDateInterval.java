@@ -9,7 +9,10 @@ import java.util.Date;
 
 import static com.epam.courses.warehouse.model.constants.ProductRecordConstants.MINIMAL_DATE;
 
-public class ProductRecordDateInterval {
+/**
+ * Date interval for search filter.
+ */
+public final class ProductRecordDateInterval {
 
     /**
      * The start interval for search filter.
@@ -26,24 +29,25 @@ public class ProductRecordDateInterval {
     /**
      * Constructor with date interval parameters.
      *
-     * @param startInterval start interval of registration date.
-     * @param endInterval end interval of registration date.
+     * @param start start interval of registration date.
+     * @param end end interval of registration date.
      */
-    public ProductRecordDateInterval(Date startInterval, Date endInterval) {
-        if(startInterval == null){
+    public ProductRecordDateInterval(final Date start, final Date end) {
+        if (start == null) {
             this.startInterval = null;
         } else {
-            this.startInterval = new Date(startInterval.getTime());
+            this.startInterval = new Date(start.getTime());
         }
-        if(endInterval == null){
+        if (end == null) {
             this.endInterval = null;
         } else {
-            this.endInterval = new Date(endInterval.getTime());
+            this.endInterval = new Date(end.getTime());
         }
     }
 
     /**
      * Constructor with default date interval parameters.
+     * @throws ParseException Parse exception.
      */
     public ProductRecordDateInterval() throws ParseException {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -55,22 +59,23 @@ public class ProductRecordDateInterval {
      * @return Returns the start interval for search filter.
      */
     public Date getStartInterval() {
-        if(this.startInterval == null){
+        if (this.startInterval == null) {
             return null;
         }
         return new Date(startInterval.getTime());
     }
 
     /**
-     * Sets the start interval of for search filter to the <code>startInterval</code>.
+     * Sets the start interval of for search filter to the
+     * <code>startInterval</code>.
      *
-     * @param startInterval the new start interval for search filter.
+     * @param start the new start interval for search filter.
      */
-    public void setStartInterval(Date startInterval) {
-        if(startInterval == null){
+    public void setStartInterval(final Date start) {
+        if (start == null) {
             this.startInterval = null;
         } else {
-            this.startInterval = new Date(startInterval.getTime());
+            this.startInterval = new Date(start.getTime());
         }
     }
 
@@ -78,7 +83,7 @@ public class ProductRecordDateInterval {
      * @return Returns the end interval for search filter.
      */
     public Date getEndInterval() {
-        if(this.endInterval == null){
+        if (this.endInterval == null) {
             return null;
         }
         return new Date(endInterval.getTime());
@@ -87,13 +92,13 @@ public class ProductRecordDateInterval {
     /**
      * Sets the end interval for search filter to the <code>endInterval</code>.
      *
-     * @param endInterval the new end interval for search filter.
+     * @param end the new end interval for search filter.
      */
-    public void setEndInterval(Date endInterval) {
-        if(endInterval == null){
+    public void setEndInterval(final Date end) {
+        if (end == null) {
             this.endInterval = null;
         } else {
-            this.endInterval = new Date(endInterval.getTime());
+            this.endInterval = new Date(end.getTime());
         }
     }
 
@@ -104,10 +109,10 @@ public class ProductRecordDateInterval {
      */
     @Override
     public String toString() {
-        return "RentalOrderDateInterval{" +
-                "regStartInterval=" + startInterval +
-                ", regEndInterval=" + endInterval +
-                '}';
+        return "RentalOrderDateInterval{"
+                + "regStartInterval=" + startInterval
+                + ", regEndInterval=" + endInterval
+                + '}';
     }
 
 }

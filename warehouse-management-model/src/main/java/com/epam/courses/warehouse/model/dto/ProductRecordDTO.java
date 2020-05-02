@@ -5,9 +5,9 @@ import com.epam.courses.warehouse.model.DealTypes;
 import java.sql.Date;
 
 /**
- * POJO ProductRecord with String field productName.
+ * ProductRecord with String field productName.
  */
-public class ProductRecordDTO {
+public final class ProductRecordDTO {
 
         /**
          * Record id.
@@ -30,7 +30,7 @@ public class ProductRecordDTO {
         private Date dealDate;
 
         /**
-         * Deal type
+         * Deal type.
          */
         private DealTypes dealType;
 
@@ -44,11 +44,11 @@ public class ProductRecordDTO {
 
         /**
          * Set the record id.
-         * @param recordId record id.
+         * @param recId record id.
          * @return this ProductRecordDTO.
          */
-        public ProductRecordDTO setRecordId(Integer recordId) {
-            this.recordId = recordId;
+        public ProductRecordDTO setRecordId(final Integer recId) {
+            this.recordId = recId;
             return this;
         }
 
@@ -62,11 +62,11 @@ public class ProductRecordDTO {
 
         /**
          * Set the product name.
-         * @param productName product name.
+         * @param prodName product name.
          * @return this ProductRecordDTO.
          */
-        public ProductRecordDTO setProductName(String productName) {
-            this.productName = productName;
+        public ProductRecordDTO setProductName(final String prodName) {
+            this.productName = prodName;
             return this;
         }
 
@@ -80,11 +80,11 @@ public class ProductRecordDTO {
 
         /**
          * Set the quantity of product.
-         * @param quantityOfProduct quantity of product.
+         * @param quantity quantity of product.
          * @return this ProductRecordDTO.
          */
-        public ProductRecordDTO setQuantityOfProduct(Integer quantityOfProduct) {
-            this.quantityOfProduct = quantityOfProduct;
+        public ProductRecordDTO setQuantityOfProduct(final Integer quantity) {
+            this.quantityOfProduct = quantity;
             return this;
         }
 
@@ -93,7 +93,7 @@ public class ProductRecordDTO {
          * @return dealDate deal date.
          */
         public Date getDealDate() {
-            if(this.dealDate == null){
+            if (this.dealDate == null) {
                 return null;
             }
             return new Date(dealDate.getTime());
@@ -101,17 +101,16 @@ public class ProductRecordDTO {
 
         /**
          * Set the deal date.
-         * @param dealDate deal date.
+         * @param date deal date.
          * @return this ProductRecordDTO.
          */
-        public ProductRecordDTO setDealDate(Date dealDate) {
-            if(dealDate == null){
+        public ProductRecordDTO setDealDate(final Date date) {
+            if (date == null) {
                 this.dealDate = null;
-                return this;
             } else {
-                this.dealDate = new Date(dealDate.getTime());
-                return this;
+                this.dealDate = new Date(date.getTime());
             }
+            return this;
         }
 
         /**
@@ -124,11 +123,11 @@ public class ProductRecordDTO {
 
         /**
          * Set the deal type.
-         * @param dealType deal type.
+         * @param pDealType deal type.
          * @return this ProductRecord.
          */
-        public ProductRecordDTO setDealType(DealTypes dealType) {
-            this.dealType = dealType;
+        public ProductRecordDTO setDealType(final DealTypes pDealType) {
+            this.dealType = pDealType;
             return this;
         }
 
@@ -137,13 +136,13 @@ public class ProductRecordDTO {
          */
         @Override
         public String toString() {
-            return "ProductRecord{" +
-                    "recordId=" + recordId +
-                    ", productName=" + productName +
-                    ", quantityOfProduct=" + quantityOfProduct +
-                    ", dealDate=" + dealDate +
-                    ", dealType=" + dealType +
-                    '}';
+            return "ProductRecord{"
+                    + "recordId=" + recordId
+                    + ", productName=" + productName
+                    + ", quantityOfProduct=" + quantityOfProduct
+                    + ", dealDate=" + dealDate
+                    + ", dealType=" + dealType
+                    + '}';
         }
 
 }
