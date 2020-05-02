@@ -15,20 +15,42 @@ import java.util.List;
 /**
  * ProductRecordDto service for web app.
  */
-public class ProductRecordDtoServiceRest {
+public final class ProductRecordDtoServiceRest {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProductRecordDtoServiceRest.class);
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER
+            = LoggerFactory.getLogger(ProductRecordDtoServiceRest.class);
 
-    private static final TypeReference<List<ProductRecordDTO>> TYPE_REFERENCE =
-            new TypeReference<List<ProductRecordDTO>>() {};
+    /**
+     * TypeReference for convert value from String to ProductRecordDTO.
+     */
+    private static final TypeReference<List<ProductRecordDTO>> TYPE_REFERENCE
+            = new TypeReference<List<ProductRecordDTO>>() { };
 
+    /**
+     * URL.
+     */
     private String url;
 
+    /**
+     * Rest template.
+     */
     private RestTemplate restTemplate;
 
+    /**
+     * Object mapper.
+     */
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    public ProductRecordDtoServiceRest(String url, RestTemplate restTemplate){
+    /**
+     * Constructor for ProductRecordDtoServiceRest.
+     * @param url URL.
+     * @param restTemplate RestTemplate.
+     */
+    public ProductRecordDtoServiceRest(final String url,
+                                       final RestTemplate restTemplate) {
         this.url = url;
         this.restTemplate = restTemplate;
     }
@@ -38,10 +60,12 @@ public class ProductRecordDtoServiceRest {
      * @return <code>ProductRecordDTO</code> list.
      */
     public List<ProductRecordDTO> getAll() {
-        LOGGER.debug("ProductRecordDtoServiceRest:getAll");
+        LOGGER.debug("getAll()");
 
-        ResponseEntity responseEntity = restTemplate.getForEntity(url, List.class);
-        return objectMapper.convertValue(responseEntity.getBody(), TYPE_REFERENCE);
+        ResponseEntity responseEntity
+                = restTemplate.getForEntity(url, List.class);
+        return objectMapper.convertValue(responseEntity.getBody(),
+                TYPE_REFERENCE);
     }
 
     /**
@@ -50,15 +74,18 @@ public class ProductRecordDtoServiceRest {
      * @param by by <code>Date</code>
      * @return <code>ProductRecordDTO</code> list.
      */
-    public List<ProductRecordDTO> getAllInTimeInterval(Date from, Date by) {
-        LOGGER.debug("ProductRecordDtoServiceRest:getAll");
+    public List<ProductRecordDTO> getAllInTimeInterval(
+            final Date from, final Date by) {
+        LOGGER.debug("getAllInTimeInterval({},{})", from, by);
 
         Date[] dates = new Date[2];
         dates[0] = from;
         dates[1] = by;
 
-        ResponseEntity responseEntity = restTemplate.postForEntity(url, dates, List.class);
-        return objectMapper.convertValue(responseEntity.getBody(), TYPE_REFERENCE);
+        ResponseEntity responseEntity
+                = restTemplate.postForEntity(url, dates, List.class);
+        return objectMapper
+                .convertValue(responseEntity.getBody(), TYPE_REFERENCE);
     }
 
     /**
@@ -66,11 +93,13 @@ public class ProductRecordDtoServiceRest {
      * @param product Product.
      * @return boolean.
      */
-    public boolean productRecordExist(Product product){
+    public boolean productRecordExist(final Product product) {
+        LOGGER.debug("productRecordExist({})", product);
         List<ProductRecordDTO> productRecordDTOS = getAll();
 
         for (ProductRecordDTO productRecordDTO : productRecordDTOS) {
-            if (productRecordDTO.getProductName().equalsIgnoreCase(product.getProductName())) {
+            if (productRecordDTO.getProductName()
+                    .equalsIgnoreCase(product.getProductName())) {
                 return true;
             }
         }

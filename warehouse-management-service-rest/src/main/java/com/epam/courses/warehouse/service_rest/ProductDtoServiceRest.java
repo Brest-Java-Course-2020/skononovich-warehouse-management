@@ -14,18 +14,38 @@ import java.util.List;
 /**
  * ProductDto service for web app.
  */
-public class ProductDtoServiceRest {
+public final class ProductDtoServiceRest {
+    /**
+     * Logger.
+     */
     private static final Logger LOOGER = LoggerFactory.getLogger(ProductDtoServiceRest.class);
 
-    private static final TypeReference<List<ProductDto>> TYPE_REFERENCE = new TypeReference<List<ProductDto>>(){};
+    /**
+     * TypeReference for convert value from String to ProductDto.
+     */
+    private static final TypeReference<List<ProductDto>> TYPE_REFERENCE = new TypeReference<List<ProductDto>>() { };
 
+    /**
+     * URL.
+     */
     private String url;
 
+    /**
+     * RestTemplate.
+     */
     private RestTemplate restTemplate;
 
+    /**
+     * ObjectMapper.
+     */
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    public ProductDtoServiceRest(String url, RestTemplate restTemplate){
+    /**
+     * Constructor for ProductDtoServiceRest.
+     * @param url URL.
+     * @param restTemplate RestTemplate.
+     */
+    public ProductDtoServiceRest(final String url, final RestTemplate restTemplate) {
         this.url = url;
         this.restTemplate = restTemplate;
     }
@@ -35,7 +55,7 @@ public class ProductDtoServiceRest {
      * @return <code>ProductDto</code> list.
      */
     public List<ProductDto> getAllProductsWithSummaryCount() {
-        LOOGER.debug("ProductDtoServiceRest:getAllProductsWithSummaryCount");
+        LOOGER.debug("getAllProductsWithSummaryCount()");
 
         ResponseEntity responseEntity = restTemplate.getForEntity(url, List.class);
         return objectMapper.convertValue(responseEntity.getBody(), TYPE_REFERENCE);
@@ -46,13 +66,15 @@ public class ProductDtoServiceRest {
      * @param productRecord ProductRecord with product quantity.
      * @return boolean.
      */
-    public boolean enoughProducts(ProductRecord productRecord){
+    public boolean enoughProducts(final ProductRecord productRecord) {
+        LOOGER.debug("enoughProducts({})", productRecord);
         List<ProductDto> productDtoList = getAllProductsWithSummaryCount();
 
-        for (ProductDto product : productDtoList){
-            if(product.getProductId().equals(productRecord.getProductId())
-                    && product.getProductSumCount() >= productRecord.getQuantityOfProduct())
+        for (ProductDto product : productDtoList) {
+            if (product.getProductId().equals(productRecord.getProductId())
+                    && product.getProductSumCount() >= productRecord.getQuantityOfProduct()) {
                 return true;
+            }
         }
         return false;
     }
