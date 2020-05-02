@@ -16,13 +16,25 @@ import java.util.List;
  * ProductRecordDto Rest controller.
  */
 @RestController
-public class ProductRecordDtoController {
-    Logger LOGGER = LoggerFactory.getLogger(ProductRecordDtoController.class);
+public final class ProductRecordDtoController {
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER
+            = LoggerFactory.getLogger(ProductRecordDtoController.class);
 
+    /**
+     * ProductRecordDto service.
+     */
     private ProductRecordDtoService productRecordDtoService;
 
-    public ProductRecordDtoController(ProductRecordDtoService productRecordDtoService){
-        this.productRecordDtoService = productRecordDtoService;
+    /**
+     * Constructor for ProductRecordDtoController.
+     * @param service productRecordDto service.
+     */
+    public ProductRecordDtoController(
+            final ProductRecordDtoService service) {
+        this.productRecordDtoService = service;
     }
 
     /**
@@ -30,8 +42,8 @@ public class ProductRecordDtoController {
      * @return <code>ProductRecordDTO</code> list.
      */
     @GetMapping(value = "/records_dtos")
-    public List<ProductRecordDTO> getAll(){
-        LOGGER.debug("ProductRecordDtoController:getAll");
+    public List<ProductRecordDTO> getAll() {
+        LOGGER.debug("getAll()");
 
         return productRecordDtoService.getAll();
     }
@@ -42,8 +54,8 @@ public class ProductRecordDtoController {
      * @return <code>ProductRecordDTO</code> list.
      */
     @PostMapping(value = "/records_dtos", consumes = "application/json", produces = "application/json")
-    public List<ProductRecordDTO> getAllInTimeInterval(@RequestBody Date[] dates){
-        LOGGER.debug("ProductRecordDtoController:getAllInTimeInterval");
+    public List<ProductRecordDTO> getAllInTimeInterval(@RequestBody final Date[] dates) {
+        LOGGER.debug("getAllInTimeInterval({},{})", dates[0], dates[1]);
 
         return productRecordDtoService.getAllInTimeInterval(dates[0], dates[1]);
     }

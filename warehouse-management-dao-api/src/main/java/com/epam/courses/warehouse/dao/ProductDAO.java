@@ -5,6 +5,9 @@ import com.epam.courses.warehouse.model.Product;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Product DAO interface.
+ */
 public interface ProductDAO {
 
     /**

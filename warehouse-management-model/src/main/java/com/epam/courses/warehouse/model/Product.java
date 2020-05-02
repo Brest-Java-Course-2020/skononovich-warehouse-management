@@ -3,7 +3,7 @@ package com.epam.courses.warehouse.model;
 /**
  * POJO Product.
  */
-public class Product {
+public final class Product {
 
     /**
      * Product id.
@@ -25,10 +25,11 @@ public class Product {
 
     /**
      * Set this product id.
-     * @param productId product id.
+     * @param id product id.
+     * @return this Product.
      */
-    public Product setProductId(Integer productId) {
-        this.productId = productId;
+    public Product setProductId(final Integer id) {
+        this.productId = id;
         return this;
     }
 
@@ -42,10 +43,11 @@ public class Product {
 
     /**
      * Set this product name.
-     * @param productName product name.
+     * @param name product name.
+     * @return this Product.
      */
-    public Product setProductName(String productName) {
-        this.productName = productName;
+    public Product setProductName(final String name) {
+        this.productName = name;
         return this;
     }
 
@@ -54,9 +56,9 @@ public class Product {
      */
     @Override
     public String toString() {
-        return "Product{" +
-                "productId=" + productId +
-                ", productName='" + productName + '\'' +
-                '}';
+        return "Product{"
+                + "productId=" + productId
+                + ", productName='" + productName + '\''
+                + '}';
     }
 }

@@ -12,38 +12,72 @@ import org.springframework.stereotype.Repository;
 import java.sql.Date;
 import java.util.List;
 
+/**
+ * MySQL implementation ProductRecordDtoDAO interface.
+ */
 @Repository
 public class ProductRecordDtoDAOJdbcMsql implements ProductRecordDtoDAO {
 
-    private Logger LOGGER = LoggerFactory.getLogger(ProductRecordDtoDAOJdbcMsql.class);
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER
+            = LoggerFactory.getLogger(ProductRecordDtoDAOJdbcMsql.class);
 
+    /**
+     * SQL script get all records.
+     */
     @Value("${recordDto.getAll}")
     private String sqlGetAll;
 
+    /**
+     * SQL script get all records in date interval.
+     */
     @Value("${recordDto.getAllInTimeInterval}")
     private String sqlGetAllInTimeInterval;
 
+    /**
+     * Jdbc template.
+     */
     private NamedParameterJdbcTemplate jdbcTemplate;
+
+    /**
+     * ProductRecordDto row mapper.
+     */
     private ProductRecordDtoRowMapper productRecordDtoRowMapper;
 
-    public ProductRecordDtoDAOJdbcMsql(NamedParameterJdbcTemplate namedParameterJdbcTemplate,
-                                       ProductRecordDtoRowMapper productRecordDtoRowMapper){
+    /**
+     * Constructor.
+     * @param namedParameterJdbcTemplate jdbc template.
+     * @param rowMapper row mapper.
+     */
+    public ProductRecordDtoDAOJdbcMsql(
+            final NamedParameterJdbcTemplate namedParameterJdbcTemplate,
+            final ProductRecordDtoRowMapper rowMapper) {
         this.jdbcTemplate = namedParameterJdbcTemplate;
-        this.productRecordDtoRowMapper = productRecordDtoRowMapper;
+        this.productRecordDtoRowMapper = rowMapper;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<ProductRecordDTO> getAll() {
-        LOGGER.debug("ProductRecordDAOJdbcMsql:getAll");
+        LOGGER.debug("getAll()");
         return jdbcTemplate.query(sqlGetAll, productRecordDtoRowMapper);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<ProductRecordDTO> getAllInTimeInterval(Date from, Date to) {
-        LOGGER.debug("ProductRecordDAOJdbcMsql:getAllInTimeInterval from: " + from.toString() + " to: " + to);
+    public List<ProductRecordDTO> getAllInTimeInterval(final Date from,
+                                                       final Date to) {
+        LOGGER.debug("getAllInTimeInterval({},{})", from, to);
         MapSqlParameterSource parameterSource = new MapSqlParameterSource()
                 .addValue("from", from)
                 .addValue("to", to);
-        return jdbcTemplate.query(sqlGetAllInTimeInterval, parameterSource, productRecordDtoRowMapper);
+        return jdbcTemplate.query(sqlGetAllInTimeInterval,
+                parameterSource, productRecordDtoRowMapper);
     }
 }

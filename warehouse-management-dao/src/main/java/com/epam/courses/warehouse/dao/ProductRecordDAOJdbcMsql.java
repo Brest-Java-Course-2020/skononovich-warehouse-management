@@ -12,26 +12,50 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Objects;
 
+/**
+ * MySQL implementation of ProductRecordDAO.
+ */
 @Repository
-public class ProductRecordDAOJdbcMsql implements ProductRecordDAO{
+public class ProductRecordDAOJdbcMsql implements ProductRecordDAO {
 
-    private Logger LOGGER = LoggerFactory.getLogger(ProductRecordDtoDAOJdbcMsql.class);
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER
+            = LoggerFactory.getLogger(ProductRecordDtoDAOJdbcMsql.class);
 
+    /**
+     * SQL script create record.
+     */
     @Value("${record.create}")
     private String sqlCreateRecord;
 
+    /**
+     * SQL script should give out product.
+     */
     @Value("${record.shouldGiveOutProduct}")
     private String sqlShouldGiveOutProduct;
 
+    /**
+     * Jdbc template.
+     */
     private NamedParameterJdbcTemplate jdbcTemplate;
 
-    public ProductRecordDAOJdbcMsql(NamedParameterJdbcTemplate namedParameterJdbcTemplate){
+    /**
+     * Constructor.
+     * @param namedParameterJdbcTemplate jdbc template.
+     */
+    public ProductRecordDAOJdbcMsql(
+            final NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.jdbcTemplate = namedParameterJdbcTemplate;
     }
 
-        @Override
-    public Integer create(ProductRecord productRecord) {
-        LOGGER.debug("ProductRecordDAOJdbcMsql:create productId = " + productRecord.getProductId());
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Integer create(final ProductRecord productRecord) {
+        LOGGER.debug("create({})", productRecord.getProductId());
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         MapSqlParameterSource parameterSource = new MapSqlParameterSource()
@@ -44,16 +68,20 @@ public class ProductRecordDAOJdbcMsql implements ProductRecordDAO{
         return Objects.requireNonNull(keyHolder.getKey()).intValue();
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Boolean shouldGiveOutProduct(ProductRecord productRecord) {
+    public Boolean shouldGiveOutProduct(final ProductRecord productRecord) {
         LOGGER.debug("shouldGiveOutProduct ({})", productRecord);
 
         MapSqlParameterSource parameterSource = new MapSqlParameterSource()
                 .addValue("product_id", productRecord.getProductId());
 
-        Integer response = jdbcTemplate.queryForObject(sqlShouldGiveOutProduct, parameterSource, Integer.class);
+        Integer response = jdbcTemplate.queryForObject(sqlShouldGiveOutProduct,
+                parameterSource, Integer.class);
 
-        return Objects.requireNonNull(response) >= productRecord.getQuantityOfProduct();
+        return Objects.requireNonNull(response)
+                >= productRecord.getQuantityOfProduct();
     }
 }

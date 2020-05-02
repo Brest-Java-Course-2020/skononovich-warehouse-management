@@ -3,7 +3,7 @@ package com.epam.courses.warehouse.model.dto;
 /**
  * POJO Product with summary count product in warehouse.
  */
-public class ProductDto {
+public final class ProductDto {
 
     /**
      * Product id.
@@ -28,10 +28,10 @@ public class ProductDto {
 
     /**
      * Constructor with product name.
-     * @param productName product name.
+     * @param prodName product name.
      */
-    public ProductDto(String productName) {
-        this.productName = productName;
+    public ProductDto(final String prodName) {
+        this.productName = prodName;
     }
 
     /**
@@ -44,11 +44,11 @@ public class ProductDto {
 
     /**
      * Set the Product identifier.
-     * @param productId product id.
+     * @param prodId product id.
      * @return this dto product.
      */
-    public ProductDto setProductId(Integer productId) {
-        this.productId = productId;
+    public ProductDto setProductId(final Integer prodId) {
+        this.productId = prodId;
         return this;
     }
 
@@ -62,11 +62,11 @@ public class ProductDto {
 
     /**
      * Set the product name.
-     * @param productName product name.
+     * @param prodName product name.
      * @return this dto product.
      */
-    public ProductDto setProductName(String productName) {
-        this.productName = productName;
+    public ProductDto setProductName(final String prodName) {
+        this.productName = prodName;
         return this;
     }
 
@@ -80,11 +80,11 @@ public class ProductDto {
 
     /**
      * Set the Product quantity.
-     * @param sumCount product quantity.
+     * @param quantity product quantity.
      * @return this dto product.
      */
-    public ProductDto setProductSumCount(Integer sumCount){
-        this.productSumCount = sumCount;
+    public ProductDto setProductSumCount(final Integer quantity) {
+        this.productSumCount = quantity;
         return this;
     }
 
@@ -93,10 +93,10 @@ public class ProductDto {
      */
     @Override
     public String toString() {
-        return "ProductDto{" +
-                "productId=" + productId +
-                ", productName='" + productName + '\'' +
-                ", productSumCount=" + productSumCount +
-                '}';
+        return "ProductDto{"
+                + "productId=" + productId
+                + ", productName='" + productName + '\''
+                + ", productSumCount=" + productSumCount
+                + '}';
     }
 }

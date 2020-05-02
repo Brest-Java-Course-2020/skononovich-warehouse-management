@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * POJO Product record.
  */
-public class ProductRecord {
+public final class ProductRecord {
     /**
      * Product record id.
      */
@@ -30,7 +30,7 @@ public class ProductRecord {
     private Date productRecordDate;
 
     /**
-     * Deal type
+     * Deal type.
      */
     private DealTypes dealType;
 
@@ -44,11 +44,11 @@ public class ProductRecord {
 
     /**
      * Set the product record id.
-     * @param productRecordId product record id.
+     * @param id product record id.
      * @return this ProductRecord.
      */
-    public ProductRecord setProductRecordId(Integer productRecordId) {
-        this.productRecordId = productRecordId;
+    public ProductRecord setProductRecordId(final Integer id) {
+        this.productRecordId = id;
         return this;
     }
 
@@ -62,11 +62,11 @@ public class ProductRecord {
 
     /**
      * Set the product id.
-     * @param productId product id.
+     * @param id product id.
      * @return this ProductRecord.
      */
-    public ProductRecord setProductId(Integer productId) {
-        this.productId = productId;
+    public ProductRecord setProductId(final Integer id) {
+        this.productId = id;
         return this;
     }
 
@@ -80,11 +80,11 @@ public class ProductRecord {
 
     /**
      * Set the quantity of product.
-     * @param quantityOfProduct quantity of product.
+     * @param quantity quantity of product.
      * @return this ProductRecord.
      */
-    public ProductRecord setQuantityOfProduct(Integer quantityOfProduct) {
-        this.quantityOfProduct = quantityOfProduct;
+    public ProductRecord setQuantityOfProduct(final Integer quantity) {
+        this.quantityOfProduct = quantity;
         return this;
     }
 
@@ -93,7 +93,7 @@ public class ProductRecord {
      * @return productRecordDate product record date.
      */
     public Date getProductRecordDate() {
-        if(this.productRecordDate == null){
+        if (this.productRecordDate == null) {
             return null;
         }
         return new Date(productRecordDate.getTime());
@@ -101,17 +101,16 @@ public class ProductRecord {
 
     /**
      * Set the product record date.
-     * @param productRecordDate product record date.
+     * @param date product record date.
      * @return this ProductRecord.
      */
-    public ProductRecord setProductRecordDate(Date productRecordDate) {
-        if(productRecordDate == null){
+    public ProductRecord setProductRecordDate(final Date date) {
+        if (date == null) {
             this.productRecordDate = null;
-            return this;
         } else {
-            this.productRecordDate = new Date(productRecordDate.getTime());
-            return this;
+            this.productRecordDate = new Date(date.getTime());
         }
+        return this;
     }
 
     /**
@@ -124,11 +123,11 @@ public class ProductRecord {
 
     /**
      * Set the deal type.
-     * @param dealType deal type.
+     * @param pDealType deal type.
      * @return this ProductRecord.
      */
-    public ProductRecord setDealType(DealTypes dealType) {
-        this.dealType = dealType;
+    public ProductRecord setDealType(final DealTypes pDealType) {
+        this.dealType = pDealType;
         return this;
     }
 
@@ -137,12 +136,12 @@ public class ProductRecord {
      */
     @Override
     public String toString() {
-        return "ProductRecord{" +
-                "productRecordId=" + productRecordId +
-                ", productId=" + productId +
-                ", quantityOfProduct=" + quantityOfProduct +
-                ", productRecordDate=" + productRecordDate +
-                ", dealType=" + dealType +
-                '}';
+        return "ProductRecord{"
+                + "productRecordId=" + productRecordId
+                + ", productId=" + productId
+                + ", quantityOfProduct=" + quantityOfProduct
+                + ", productRecordDate=" + productRecordDate
+                + ", dealType=" + dealType
+                + '}';
     }
 }

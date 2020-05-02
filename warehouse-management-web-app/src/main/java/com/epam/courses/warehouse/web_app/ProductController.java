@@ -21,17 +21,34 @@ import java.util.Optional;
  * Product web controller.
  */
 @Controller
-public class ProductController {
+public final class ProductController {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
 
-    private final ProductServiceRest productService;
+    /**
+     * ProductServiceRest.
+     */
+    private ProductServiceRest productService;
 
-    private final ProductDtoServiceRest productDtoService;
+    /**
+     * ProductDtoServiceRest.
+     */
+    private ProductDtoServiceRest productDtoService;
 
+    /**
+     * ProductValidator.
+     */
     @Autowired
     ProductValidator productValidator;
 
-    public ProductController(ProductServiceRest productService, ProductDtoServiceRest productDtoService){
+    /**
+     * Constructor for ProductController.
+     * @param productService ProductService.
+     * @param productDtoService ProductDtoService.
+     */
+    public ProductController(final ProductServiceRest productService, final ProductDtoServiceRest productDtoService) {
         this.productService = productService;
         this.productDtoService = productDtoService;
     }
@@ -42,8 +59,8 @@ public class ProductController {
      * @return View name.
      */
     @GetMapping("/products")
-    public final String products(Model model){
-        LOGGER.debug("ProductController:products");
+    public String products(Model model) {
+        LOGGER.debug("products()");
 
         model.addAttribute("products", productDtoService.getAllProductsWithSummaryCount());
         return "products";
@@ -56,7 +73,7 @@ public class ProductController {
      * @return View name.
      */
     @GetMapping(value = "/product/{id}")
-    public final String goToProductPage(@PathVariable Integer id, Model model){
+    public String goToProductPage(@PathVariable Integer id, Model model) {
     LOGGER.debug("goToProductPage({}, {})", id, model );
 
     Optional<Product> productOptional = productService.getById(id);
@@ -96,7 +113,7 @@ public class ProductController {
      * @return view name
      */
     @GetMapping(value = "/product")
-    public final String gotoAddProductPage(Model model) {
+    public String gotoAddProductPage(Model model) {
 
         LOGGER.debug("gotoAddProductPage({})", model);
         model.addAttribute("product", new Product());
@@ -130,7 +147,7 @@ public class ProductController {
      * @return view name
      */
     @GetMapping(value = "/product/delete/{id}")
-    public final String deleteProductById(@PathVariable Integer id, Model model) {
+    public String deleteProductById(@PathVariable Integer id, Model model) {
 
         LOGGER.debug("delete({},{})", id, model);
         productService.delete(id);

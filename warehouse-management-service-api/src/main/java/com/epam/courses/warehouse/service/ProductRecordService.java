@@ -16,7 +16,7 @@ public interface ProductRecordService {
     /**
      * Check quantity of product in warehouse.
      * @param productRecord product record.
-     * @return <code>Boolean</code> representation, can give out a product or not.
+     * @return Boolean representation, can give out a product or not.
      */
     Boolean shouldGiveOutProduct(ProductRecord productRecord);
 }

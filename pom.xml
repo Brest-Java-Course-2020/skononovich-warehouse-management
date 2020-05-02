@@ -349,6 +349,9 @@
                                     <module name="TreeWalker">
                                         <module name="ConstantName"/>
                                         <module name="EmptyBlock"/>
+                                        <module name="AnonInnerLength">
+                                            <property name="max" value="120"/>
+                                        </module>
                                     </module>
                                 </module>
                             </checkstyleRules>

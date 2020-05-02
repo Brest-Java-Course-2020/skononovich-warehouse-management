@@ -7,23 +7,39 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * ProductRecord service implementation.
+ */
 @Service
 public class ProductRecordServiceImpl implements ProductRecordService {
 
-    private Logger LOGGER = LoggerFactory.getLogger(ProductRecordServiceImpl.class);
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER
+            = LoggerFactory.getLogger(ProductRecordServiceImpl.class);
 
+    /**
+     * ProductRecordDao.
+     */
     @Autowired
     private ProductRecordDAO productRecordDAO;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Integer create(ProductRecord productRecord) {
-        LOGGER.debug("ProductRecordDAO:create");
+    public Integer create(final ProductRecord productRecord) {
+        LOGGER.debug("create({})", productRecord);
 
         return productRecordDAO.create(productRecord);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Boolean shouldGiveOutProduct(ProductRecord productRecord) {
+    public Boolean shouldGiveOutProduct(final ProductRecord productRecord) {
         LOGGER.debug("shouldGiveOutProduct ({})", productRecord);
         return productRecordDAO.shouldGiveOutProduct(productRecord);
     }
