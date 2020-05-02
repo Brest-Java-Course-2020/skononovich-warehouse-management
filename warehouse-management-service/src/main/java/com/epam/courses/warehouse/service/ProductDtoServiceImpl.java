@@ -9,16 +9,29 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * ProductDto service implementation.
+ */
 @Service
-public class ProductDtoServiceImpl implements ProductDtoService {
-    private Logger LOGGER = LoggerFactory.getLogger(ProductDtoServiceImpl.class);
+public final class ProductDtoServiceImpl implements ProductDtoService {
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER
+            = LoggerFactory.getLogger(ProductDtoServiceImpl.class);
 
+    /**
+     * ProductDtoDao.
+     */
     @Autowired
     private ProductDtoDao productDtoDao;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<ProductDto> getAllProductsWithSummaryCount() {
-        LOGGER.debug("ProductDtoServiceImpl:getAllProductsWithSummaryCount");
+        LOGGER.debug("getAllProductsWithSummaryCount()");
         return productDtoDao.getAllProductsWithSummaryCount();
     }
 }
