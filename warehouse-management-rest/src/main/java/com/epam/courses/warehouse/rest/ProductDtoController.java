@@ -13,13 +13,24 @@ import java.util.Collection;
  * ProductDto Rest controller.
  */
 @RestController
-public class ProductDtoController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProductDtoController.class);
+public final class ProductDtoController {
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER
+            = LoggerFactory.getLogger(ProductDtoController.class);
 
+    /**
+     * ProductDto service.
+     */
     private ProductDtoService productDtoService;
 
-    public ProductDtoController(ProductDtoService productDtoService) {
-        this.productDtoService = productDtoService;
+    /**
+     * Controller.
+     * @param service productDto service.
+     */
+    public ProductDtoController(final ProductDtoService service) {
+        this.productDtoService = service;
     }
 
     /**
@@ -27,7 +38,7 @@ public class ProductDtoController {
      * @return <code>ProductDto</code> collection.
      */
     @GetMapping(value = "/products_dtos")
-    public Collection<ProductDto> products(){
+    public Collection<ProductDto> products() {
         LOGGER.debug("ProductController:products");
 
         return productDtoService.getAllProductsWithSummaryCount();

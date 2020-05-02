@@ -14,18 +14,30 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
 
+import static com.epam.courses.warehouse.rest.exception.CustomExceptionHandler.PRODUCT_NOT_ENOUGH;
+
 /**
  * ProductRecord Rest controller.
  */
 @RestController
-public class ProductRecordController {
-    public static final String PRODUCT_NOT_ENOUGH = "product.not_enough";
+public final class ProductRecordController {
 
-    Logger LOGGER = LoggerFactory.getLogger(ProductRecordController.class);
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER
+            = LoggerFactory.getLogger(ProductRecordController.class);
 
+    /**
+     * ProductRecord service.
+     */
     private ProductRecordService productRecordService;
 
-    public ProductRecordController(ProductRecordService service){
+    /**
+     * Constructor for ProductRecordController.
+     * @param service ProductRecord service.
+     */
+    public ProductRecordController(final ProductRecordService service) {
         this.productRecordService = service;
     }
 
@@ -35,11 +47,11 @@ public class ProductRecordController {
      * @return <code>ResponseEntity</code>
      */
     @PostMapping(value = "/records",  consumes = "application/json", produces = "application/json")
-    public ResponseEntity create(@RequestBody ProductRecord productRecord){
-        LOGGER.debug("ProductRecordController:create");
+    public ResponseEntity create(@RequestBody final ProductRecord productRecord) {
+        LOGGER.debug("create({})", productRecord);
 
-        if(productRecord.getDealType().equals(DealTypes.DELIVERY)
-                && !productRecordService.shouldGiveOutProduct(productRecord)){
+        if (productRecord.getDealType().equals(DealTypes.DELIVERY)
+                && !productRecordService.shouldGiveOutProduct(productRecord)) {
             return new ResponseEntity<>(new ErrorResponse(PRODUCT_NOT_ENOUGH,
                     Collections.singletonList("Product no enough for id = " + productRecord.getProductId())),
             HttpStatus.CONFLICT);

@@ -16,33 +16,64 @@ import java.util.List;
  * Custom exception handler.
  */
 @ControllerAdvice
-public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
+public final class CustomExceptionHandler
+        extends ResponseEntityExceptionHandler {
+    /**
+     * Product not found message.
+     */
     public static final String PRODUCT_NOT_FOUND = "product.not_found";
+    /**
+     * Product is exist message.
+     */
     public static final String PRODUCT_IS_EXIST = "product.is_exist";
+    /**
+     * Validation error message.
+     */
     public static final String VALIDATION_ERROR = "validation_error";
+    /**
+     * Product not enough message.
+     */
     public static final String PRODUCT_NOT_ENOUGH = "product.not_enough";
 
+    /**
+     * Product not found exception handler.
+     * @param ex Exception.
+     * @param request web request.
+     * @return ResponseEntity.
+     */
     @ExceptionHandler(ProductNotFoundException.class)
-    public final ResponseEntity<ErrorResponse> handleProductNotFoundException(
-            ProductNotFoundException ex, WebRequest request) {
+    public ResponseEntity<ErrorResponse> handleProductNotFoundException(
+           final ProductNotFoundException ex, final WebRequest request) {
         List<String> details = new ArrayList<>();
         details.add(ex.getLocalizedMessage());
         ErrorResponse error = new ErrorResponse(PRODUCT_NOT_FOUND, details);
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * Product is exist exception handler.
+     * @param ex Exception.
+     * @param request web request.
+     * @return ResponseEntity.
+     */
     @ExceptionHandler(ProductIsExistException.class)
-    public final ResponseEntity<ErrorResponse> handleProductIsExistException(
-            ProductIsExistException ex, WebRequest request) {
+    public ResponseEntity<ErrorResponse> handleProductIsExistException(
+            final ProductIsExistException ex, final WebRequest request) {
         List<String> details = new ArrayList<>();
         details.add(ex.getLocalizedMessage());
         ErrorResponse error = new ErrorResponse(PRODUCT_IS_EXIST, details);
         return new ResponseEntity<>(error, HttpStatus.CONFLICT);
     }
 
+    /**
+     * Product not enough exception handler.
+     * @param ex Exception.
+     * @param request web request.
+     * @return ResponseEntity.
+     */
     @ExceptionHandler(ProductNotEnoughException.class)
-    public final ResponseEntity<ErrorResponse> handleProductNotEnoughException(
-            ProductNotEnoughException ex, WebRequest request) {
+    public ResponseEntity<ErrorResponse> handleProductNotEnoughException(
+            final ProductNotEnoughException ex, final WebRequest request) {
         List<String> details = new ArrayList<>();
         details.add(ex.getLocalizedMessage());
         ErrorResponse error = new ErrorResponse(PRODUCT_NOT_ENOUGH, details);
@@ -50,9 +81,20 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
 
-    @ExceptionHandler(value = {IllegalArgumentException.class, DataIntegrityViolationException.class, HttpMessageConversionException.class})
-    public ResponseEntity<ErrorResponse> handleAnotherExceptions(Exception ex, WebRequest request) {
+    /**
+     * Handler for other another exceptions.
+     * @param ex Exception.
+     * @param request web request.
+     * @return ResponseEntity.
+     */
+    @ExceptionHandler(value = {IllegalArgumentException.class,
+            DataIntegrityViolationException.class,
+            HttpMessageConversionException.class})
+    public ResponseEntity<ErrorResponse> handleAnotherExceptions(
+            final Exception ex,
+            final WebRequest request) {
         return new ResponseEntity<>(
-                new ErrorResponse(VALIDATION_ERROR, ex), HttpStatus.UNPROCESSABLE_ENTITY);
+                new ErrorResponse(VALIDATION_ERROR, ex),
+                HttpStatus.UNPROCESSABLE_ENTITY);
     }
 }

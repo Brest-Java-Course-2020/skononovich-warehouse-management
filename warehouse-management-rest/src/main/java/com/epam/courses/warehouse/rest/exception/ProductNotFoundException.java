@@ -1,7 +1,16 @@
 package com.epam.courses.warehouse.rest.exception;
 
-public class ProductNotFoundException extends RuntimeException {
-    public ProductNotFoundException(Integer id){
+/**
+ * ProductNotFoundException.
+ * Exception thrown when user try take non exist Product.
+ */
+public final class ProductNotFoundException extends RuntimeException {
+
+    /**
+     * Constructor for ProductNotFoundException.
+     * @param id product id.
+     */
+    public ProductNotFoundException(final Integer id) {
         super("Product not found for id:" + id);
     }
 }
