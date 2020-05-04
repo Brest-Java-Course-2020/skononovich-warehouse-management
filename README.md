@@ -1,4 +1,6 @@
 ![Java CI with Maven](https://github.com/Brest-Java-Course-2020/skononovich-warehouse-management/workflows/Java%20CI%20with%20Maven/badge.svg)
+[![Build Status](https://travis-ci.org/Brest-Java-Course-2020/skononovich-warehouse-management.svg?branch=master)](https://travis-ci.org/Brest-Java-Course-2020/skononovich-warehouse-management)
+
 # skononovich-warehouse-management
 Warehouse management demo application.
 
