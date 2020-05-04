@@ -3,7 +3,7 @@ package com.epam.courses.warehouse.model;
 /**
  * POJO Product.
  */
-public final class Product {
+public class Product {
 
     /**
      * Product id.

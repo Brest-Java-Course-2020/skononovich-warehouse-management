@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 /**
  * ProductRecord service for web app.
  */
-public final class ProductRecordServiceRest {
+public class ProductRecordServiceRest {
 
     /**
      * Logger.

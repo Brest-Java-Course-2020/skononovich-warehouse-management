@@ -17,14 +17,23 @@ import static com.epam.courses.warehouse.model.constants.ProductConstants.PRODUC
 @Component
 public class ProductValidator implements Validator {
 
+    /**
+     * ProductServiceRest.
+     */
     @Autowired
     ProductServiceRest productServiceRest;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean supports(Class<?> clazz) {
         return Product.class.equals(clazz);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void validate(Object target, Errors errors) {
 

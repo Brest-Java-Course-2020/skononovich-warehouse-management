@@ -15,7 +15,7 @@ import java.util.Optional;
 /**
  * Product service for web app.
  */
-public final class ProductServiceRest {
+public class ProductServiceRest {
 
     /**
      * Logger.

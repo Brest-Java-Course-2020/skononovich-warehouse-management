@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * ProductDto service for web app.
  */
-public final class ProductDtoServiceRest {
+public class ProductDtoServiceRest {
     /**
      * Logger.
      */
