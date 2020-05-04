@@ -19,14 +19,23 @@ import static com.epam.courses.warehouse.model.constants.ProductRecordConstants.
 @Component
 public class RecordValidator implements Validator {
 
+    /**
+     * ProductDtoServiceRest.
+     */
     @Autowired
     ProductDtoServiceRest productDtoServiceRest;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean supports(Class<?> clazz) {
         return ProductRecord.class.equals(clazz);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void validate(Object target, Errors errors) {
 

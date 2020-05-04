@@ -23,26 +23,54 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Objects;
 
+/**
+ * Controller for records.
+ */
 @Controller
 public class RecordController {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(RecordController.class);
 
+    /**
+     * ProductRecordDtoServiceRest.
+     */
     private final ProductRecordDtoServiceRest productRecordDtoServiceRest;
 
+    /**
+     * ProductRecordServiceRest.
+     */
     private final ProductRecordServiceRest productRecordServiceRest;
 
+    /**
+     * ProductServiceRest.
+     */
     private final ProductServiceRest productService;
 
+    /**
+     * Validator for records.
+     */
     @Autowired
     RecordValidator recordValidator;
 
+    /**
+     * Validator for date interval.
+     */
     @Autowired
     ProductRecordDateIntervalValidator productRecordDateIntervalValidator;
 
+    /**
+     * Constructor for RecordController.
+     * @param productRecordService ProductRecordService.
+     * @param productRecordDtoService ProductRecordDtoService.
+     * @param productService ProductService.
+     */
     public RecordController(ProductRecordServiceRest productRecordService,
                             ProductRecordDtoServiceRest productRecordDtoService,
-                            ProductServiceRest productService){
+                            ProductServiceRest productService) {
         this.productRecordServiceRest = productRecordService;
         this.productRecordDtoServiceRest = productRecordDtoService;
         this.productService = productService;
@@ -52,7 +80,7 @@ public class RecordController {
      * Go to product circulation page.
      * @param model Model.
      * @return View name.
-     * @throws ParseException
+     * @throws ParseException .
      */
     @GetMapping("/circulation")
     public final String records(Model model) throws ParseException {
@@ -81,18 +109,17 @@ public class RecordController {
 
 
         productRecordDateIntervalValidator.validate(interval, result);
-        if(result.hasErrors()){
+        if(result.hasErrors()) {
             model.addAttribute("records", productRecordDtoServiceRest.getAll());
         } else {
             model.addAttribute("interval", interval);
             model.addAttribute("records", productRecordDtoServiceRest
                     .getAllInTimeInterval(
-                            new Date(interval.getStartInterval().getTime()),
-                            new Date(interval.getEndInterval().getTime())
+                            new Date(Objects.requireNonNull(interval.getStartInterval()).getTime()),
+                            new Date(Objects.requireNonNull(interval.getEndInterval()).getTime())
                     )
             );
         }
-
         return "circulation";
     }
 
@@ -102,7 +129,7 @@ public class RecordController {
      * @return View name.
      */
     @GetMapping(value = "/record")
-    public String getRecordPage(Model model){
+    public String getRecordPage(Model model) {
         model.addAttribute("products", productService.getAll());
         model.addAttribute("dealTypes", Arrays.asList(DealTypes.values()));
         model.addAttribute("productRecord", new ProductRecord()

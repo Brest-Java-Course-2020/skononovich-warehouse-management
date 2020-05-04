@@ -12,7 +12,7 @@ import static com.epam.courses.warehouse.model.constants.ProductRecordConstants.
 /**
  * Date interval for search filter.
  */
-public final class ProductRecordDateInterval {
+public class ProductRecordDateInterval {
 
     /**
      * The start interval for search filter.

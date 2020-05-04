@@ -11,11 +11,17 @@ import org.springframework.validation.Validator;
  */
 @Component
 public class ProductRecordDateIntervalValidator implements Validator {
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean supports(Class<?> clazz) {
         return ProductRecordDateInterval.class.equals(clazz);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void validate(Object target, Errors errors) {
         ValidationUtils.rejectIfEmpty(errors, "startInterval", "startInterval.empty");

@@ -82,7 +82,7 @@ public final class ProductController {
         model.addAttribute("product", productOptional.get());
         return "updateProduct";
     } else {
-        return "redirect:products";
+        return "redirect:/products";
     }
     }
 

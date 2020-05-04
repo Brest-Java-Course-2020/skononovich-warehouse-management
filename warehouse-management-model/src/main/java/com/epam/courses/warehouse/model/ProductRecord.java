@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * POJO Product record.
  */
-public final class ProductRecord {
+public class ProductRecord {
     /**
      * Product record id.
      */
