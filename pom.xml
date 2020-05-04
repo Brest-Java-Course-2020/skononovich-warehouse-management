@@ -33,6 +33,7 @@
         <commons-lang3.version>3.8</commons-lang3.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
         <hibernate-validator.version>6.1.2.Final</hibernate-validator.version>
+        <jacoco.bundle.coveredratio.minimum>0.70</jacoco.bundle.coveredratio.minimum>
     </properties>
 
     <distributionManagement>
@@ -417,6 +418,20 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
