@@ -66,7 +66,7 @@ public final class ErrorResponse {
 
     /**
      * Get details.
-     * @return <code>List<String></code>.
+     * @return <code>String</code> list.
      */
     public List<String> getDetails() {
         return details;
@@ -74,7 +74,7 @@ public final class ErrorResponse {
 
     /**
      * Set details.
-     * @param detailsList <code>List<String></code>
+     * @param detailsList <code>String</code> list.
      */
     public void setDetails(final List<String> detailsList) {
         this.details = detailsList;

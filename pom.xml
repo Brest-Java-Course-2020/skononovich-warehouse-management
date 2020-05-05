@@ -339,20 +339,17 @@
                             <!--                            <configLocation>checkstyle.xml</configLocation>-->
                             <encoding>UTF-8</encoding>
                             <consoleOutput>true</consoleOutput>
-                            <failsOnError>true</failsOnError>
-                            <failOnViolation>true</failOnViolation>
+                            <failsOnError>false</failsOnError>
+                            <failOnViolation>false</failOnViolation>
                             <logViolationsToConsole>true</logViolationsToConsole>
-                            <!-- change to 'error' (warn) to be more strict about following checkstyle conventions -->
-                            <violationSeverity>error</violationSeverity>
+                            <!-- change to 'error' to be more strict about following checkstyle conventions -->
+                            <violationSeverity>warn</violationSeverity>
                             <checkstyleRules>
                                 <module name="Checker">
                                     <module name="JavadocPackage"/>
                                     <module name="TreeWalker">
                                         <module name="ConstantName"/>
                                         <module name="EmptyBlock"/>
-                                        <module name="AnonInnerLength">
-                                            <property name="max" value="120"/>
-                                        </module>
                                     </module>
                                 </module>
                             </checkstyleRules>
