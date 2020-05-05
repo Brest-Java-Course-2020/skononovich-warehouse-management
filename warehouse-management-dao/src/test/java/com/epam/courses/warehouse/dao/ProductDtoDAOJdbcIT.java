@@ -17,11 +17,11 @@ import static org.junit.jupiter.api.Assertions.*;
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath:test-dao.xml", "classpath*:dao.xml"})
 @Transactional
 @Rollback
-class ProductDtoDAOJdbcMsqlIT {
+class ProductDtoDAOJdbcIT {
     private static final int RECORDS_IN_LIST = 3;
 
     @Autowired
-    private ProductDtoDAOJdbcMsql productDtoDAO;
+    private ProductDtoDAOJdbc productDtoDAO;
 
     @Test
     void shouldGetAllProductsWithSummaryCount() {

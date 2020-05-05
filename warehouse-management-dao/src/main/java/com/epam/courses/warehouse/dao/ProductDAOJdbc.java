@@ -20,13 +20,13 @@ import java.util.Optional;
  * MySQL implementation of ProductDAOJdbc interface.
  */
 @Repository
-public class ProductDAOJdbcMsql implements ProductDAO {
+public class ProductDAOJdbc implements ProductDAO {
 
     /**
      * Logger.
      */
     private static final Logger LOGGER
-            = LoggerFactory.getLogger(ProductDAOJdbcMsql.class);
+            = LoggerFactory.getLogger(ProductDAOJdbc.class);
 
     /**
      * SQL script create product.
@@ -84,7 +84,7 @@ public class ProductDAOJdbcMsql implements ProductDAO {
      * @param namedParameterJdbcTemplate jdbc template.
      * @param rowMapper row mapper.
      */
-    public ProductDAOJdbcMsql(
+    public ProductDAOJdbc(
             final NamedParameterJdbcTemplate namedParameterJdbcTemplate,
             final ProductRowMapper rowMapper) {
         this.jdbcTemplate = namedParameterJdbcTemplate;

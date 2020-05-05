@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath:test-dao.xml", "classpath*:dao.xml"})
 @Transactional
 @Rollback
-class ProductDAOJdbcMsqlIT {
+class ProductDAOJdbcIT {
 
     private static final Integer FIRST_PRODUCT_ID = 1;
     private static final String FIRST_PRODUCT_NAME = "Product 1";
@@ -27,19 +27,19 @@ class ProductDAOJdbcMsqlIT {
     private static final String TEST_PRODUCT = "PRODUCT";
 
     @Autowired
-    private ProductDAOJdbcMsql productDAOJdbcMsql;
+    private ProductDAOJdbc productDAOJdbc;
 
     @Test
     public void shouldCreateProduct(){
         Product product = new Product().setProductName("test");
-        Integer productId = productDAOJdbcMsql.create(product);
+        Integer productId = productDAOJdbc.create(product);
 
         assertNotNull(productId);
         }
 
     @Test
     public void shouldGetAllProducts(){
-        List<Product> productList = productDAOJdbcMsql.getAll();
+        List<Product> productList = productDAOJdbc.getAll();
 
         assertNotNull(productList);
         assertTrue(productList.size() > 0);
@@ -47,7 +47,7 @@ class ProductDAOJdbcMsqlIT {
 
     @Test
     public void shouldGetProductById(){
-        Optional<Product> optionalProduct = productDAOJdbcMsql.getById(1);
+        Optional<Product> optionalProduct = productDAOJdbc.getById(1);
 
         assertTrue(optionalProduct.isPresent());
 
@@ -63,9 +63,9 @@ class ProductDAOJdbcMsqlIT {
                 .setProductId(NOT_RELATED_PRODUCT_ID)
                 .setProductName(THIRD_PRODUCT_NEW_NAME);
 
-        productDAOJdbcMsql.update(product);
+        productDAOJdbc.update(product);
 
-        Optional<Product> optionalUpdatedProduct = productDAOJdbcMsql.getById(NOT_RELATED_PRODUCT_ID);
+        Optional<Product> optionalUpdatedProduct = productDAOJdbc.getById(NOT_RELATED_PRODUCT_ID);
 
         assertTrue(optionalUpdatedProduct.isPresent());
         Product updatedProduct = optionalUpdatedProduct.get();
@@ -76,10 +76,10 @@ class ProductDAOJdbcMsqlIT {
 
     @Test
     public void shouldDeleteProduct(){
-        int sizeBeforeDelete = productDAOJdbcMsql.getAll().size();
+        int sizeBeforeDelete = productDAOJdbc.getAll().size();
 
-        int numberOfDeletedRecords = productDAOJdbcMsql.delete(NOT_RELATED_PRODUCT_ID);
-        int sizeAfterDelete = productDAOJdbcMsql.getAll().size();
+        int numberOfDeletedRecords = productDAOJdbc.delete(NOT_RELATED_PRODUCT_ID);
+        int sizeAfterDelete = productDAOJdbc.getAll().size();
 
         assertEquals(1, numberOfDeletedRecords);
         assertEquals(sizeBeforeDelete - 1, sizeAfterDelete);
@@ -88,9 +88,9 @@ class ProductDAOJdbcMsqlIT {
     @Test
     public void shouldCheckProductExistence(){
         Product product = new Product().setProductName(TEST_PRODUCT);
-        productDAOJdbcMsql.create(product);
+        productDAOJdbc.create(product);
 
-        Boolean productExistence = productDAOJdbcMsql.isExist(product);
+        Boolean productExistence = productDAOJdbc.isExist(product);
 
         assertNotNull(productExistence);
         assertTrue(productExistence);

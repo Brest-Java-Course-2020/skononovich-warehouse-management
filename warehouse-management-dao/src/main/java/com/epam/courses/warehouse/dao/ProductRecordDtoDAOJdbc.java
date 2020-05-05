@@ -16,13 +16,13 @@ import java.util.List;
  * MySQL implementation ProductRecordDtoDAO interface.
  */
 @Repository
-public class ProductRecordDtoDAOJdbcMsql implements ProductRecordDtoDAO {
+public class ProductRecordDtoDAOJdbc implements ProductRecordDtoDAO {
 
     /**
      * Logger.
      */
     private static final Logger LOGGER
-            = LoggerFactory.getLogger(ProductRecordDtoDAOJdbcMsql.class);
+            = LoggerFactory.getLogger(ProductRecordDtoDAOJdbc.class);
 
     /**
      * SQL script get all records.
@@ -51,7 +51,7 @@ public class ProductRecordDtoDAOJdbcMsql implements ProductRecordDtoDAO {
      * @param namedParameterJdbcTemplate jdbc template.
      * @param rowMapper row mapper.
      */
-    public ProductRecordDtoDAOJdbcMsql(
+    public ProductRecordDtoDAOJdbc(
             final NamedParameterJdbcTemplate namedParameterJdbcTemplate,
             final ProductRecordDtoRowMapper rowMapper) {
         this.jdbcTemplate = namedParameterJdbcTemplate;

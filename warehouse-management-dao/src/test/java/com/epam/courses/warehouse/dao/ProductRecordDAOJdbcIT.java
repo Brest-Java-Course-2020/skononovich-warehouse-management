@@ -19,17 +19,17 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath:test-dao.xml", "classpath*:dao.xml"})
 @Transactional
 @Rollback
-public class ProductRecordDAOJdbcMsqlIT {
+public class ProductRecordDAOJdbcIT {
     private static final int PRODUCT_ID = 1;
     private static final int QUANTITY_OF_PRODUCT = 4;
     private static final Date RECORD_DATE = Date.valueOf("2020-05-30");
     private static final DealTypes DEAL_TYPE = DealTypes.DELIVERY;
 
     @Autowired
-    private ProductRecordDAOJdbcMsql productRecordDAO;
+    private ProductRecordDAOJdbc productRecordDAO;
 
     @Autowired
-    private ProductRecordDtoDAOJdbcMsql productRecordDtoDAO;
+    private ProductRecordDtoDAOJdbc productRecordDtoDAO;
 
     @Test
     public void shouldCreateProductRecord(){

@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/jdbc
-       http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="productDtoDAO" class="com.epam.courses.warehouse.dao.ProductDtoDAOJdbcMsql">
+    <bean id="productDtoDAO" class="com.epam.courses.warehouse.dao.ProductDtoDAOJdbc">
         <constructor-arg ref="jdbcTemplate"/>
     </bean>
 
-    <bean id="productRecordDAO" class="com.epam.courses.warehouse.dao.ProductRecordDAOJdbcMsql">
+    <bean id="productRecordDAO" class="com.epam.courses.warehouse.dao.ProductRecordDAOJdbc">
         <constructor-arg ref="jdbcTemplate"/>
     </bean>
 
-    <bean id="productDAOJdbcMsql" class="com.epam.courses.warehouse.dao.ProductDAOJdbcMsql">
+    <bean id="productDAOJdbcMsql" class="com.epam.courses.warehouse.dao.ProductDAOJdbc">
         <constructor-arg ref="jdbcTemplate"/>
         <constructor-arg ref="productRowMapper"/>
     </bean>
 
-    <bean id="productRecordDtoDAO" class="com.epam.courses.warehouse.dao.ProductRecordDtoDAOJdbcMsql">
+    <bean id="productRecordDtoDAO" class="com.epam.courses.warehouse.dao.ProductRecordDtoDAOJdbc">
         <constructor-arg ref="jdbcTemplate"/>
         <constructor-arg ref="productRecordDtoRowMapper"/>
     </bean>
