@@ -127,7 +127,7 @@ You need to run these commands in different tabs or terminal windows:
         
         $ mvn -pl warehouse-management-rest/ jetty:run
 
-        $ mvn -pl warehouse-management-web-app/ jetty:run
+        $ mvn -pl warehouse-management-web-app/ jetty:run -P jetty
 
    Once started, the application should be available at:
 
