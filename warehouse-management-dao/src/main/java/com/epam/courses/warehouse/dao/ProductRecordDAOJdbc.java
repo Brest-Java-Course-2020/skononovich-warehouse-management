@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Objects;
 
 /**
- * MySQL implementation of ProductRecordDAO.
+ * Implementation of ProductRecordDAO.
  */
 @Repository
 public class ProductRecordDAOJdbc implements ProductRecordDAO {

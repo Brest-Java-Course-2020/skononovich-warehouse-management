@@ -13,7 +13,7 @@ import java.sql.Date;
 import java.util.List;
 
 /**
- * MySQL implementation ProductRecordDtoDAO interface.
+ * Implementation ProductRecordDtoDAO interface.
  */
 @Repository
 public class ProductRecordDtoDAOJdbc implements ProductRecordDtoDAO {

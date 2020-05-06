@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * MySQL implementation of ProductDtoDAO interface.
+ * Implementation of ProductDtoDAO interface.
  */
 @Repository
 public class ProductDtoDAOJdbc implements ProductDtoDao {

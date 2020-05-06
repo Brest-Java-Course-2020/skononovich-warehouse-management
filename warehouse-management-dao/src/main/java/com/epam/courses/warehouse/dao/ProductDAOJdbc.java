@@ -17,7 +17,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * MySQL implementation of ProductDAOJdbc interface.
+ * Implementation of ProductDAOJdbc interface.
  */
 @Repository
 public class ProductDAOJdbc implements ProductDAO {
