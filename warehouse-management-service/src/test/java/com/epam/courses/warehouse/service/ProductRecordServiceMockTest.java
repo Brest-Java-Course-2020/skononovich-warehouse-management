@@ -1,6 +1,6 @@
 package com.epam.courses.warehouse.service;
 
-import com.epam.courses.warehouse.dao.ProductRecordDAOJdbcMsql;
+import com.epam.courses.warehouse.dao.ProductRecordDAOJdbc;
 import com.epam.courses.warehouse.model.ProductRecord;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ import static org.mockito.Mockito.*;
 public class ProductRecordServiceMockTest {
 
     @Mock
-    private ProductRecordDAOJdbcMsql productRecordDAO;
+    private ProductRecordDAOJdbc productRecordDAO;
 
     @InjectMocks
     private ProductRecordServiceImpl productRecordService;

@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath:test-dao.xml", "classpath*:dao.xml"})
 @Transactional
 @Rollback
-public class ProductRecordDtoDAOJdbcMsqlIT {
+public class ProductRecordDtoDAOJdbcIT {
     private static final int PRODUCT_RECORDS_IN_DATABASE = 5;
 
     private static final Date FROM_DATE = Date.valueOf("2020-01-12");
@@ -27,7 +27,7 @@ public class ProductRecordDtoDAOJdbcMsqlIT {
     private static final int RECORDS_IN_TIME_INTERVAL = 3;
 
     @Autowired
-    private ProductRecordDtoDAOJdbcMsql productRecordDtoDAO;
+    private ProductRecordDtoDAOJdbc productRecordDtoDAO;
 
     @Test
     public void shouldGetAllProductRecords(){

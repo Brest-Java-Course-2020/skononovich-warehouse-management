@@ -11,15 +11,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * MySQL implementation of ProductDtoDAO interface.
+ * Implementation of ProductDtoDAO interface.
  */
 @Repository
-public class ProductDtoDAOJdbcMsql implements ProductDtoDao {
+public class ProductDtoDAOJdbc implements ProductDtoDao {
     /**
      * Logger.
      */
     private static final Logger LOGGER
-            = LoggerFactory.getLogger(ProductDtoDAOJdbcMsql.class);
+            = LoggerFactory.getLogger(ProductDtoDAOJdbc.class);
 
     /**
      * SQL script get all products with summary count.
@@ -36,7 +36,7 @@ public class ProductDtoDAOJdbcMsql implements ProductDtoDao {
      * Default constructor.
      * @param namedParameterJdbcTemplate jdbc template.
      */
-    public ProductDtoDAOJdbcMsql(
+    public ProductDtoDAOJdbc(
             NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.jdbcTemplate = namedParameterJdbcTemplate;
     }

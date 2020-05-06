@@ -13,16 +13,16 @@ import org.springframework.stereotype.Repository;
 import java.util.Objects;
 
 /**
- * MySQL implementation of ProductRecordDAO.
+ * Implementation of ProductRecordDAO.
  */
 @Repository
-public class ProductRecordDAOJdbcMsql implements ProductRecordDAO {
+public class ProductRecordDAOJdbc implements ProductRecordDAO {
 
     /**
      * Logger.
      */
     private static final Logger LOGGER
-            = LoggerFactory.getLogger(ProductRecordDtoDAOJdbcMsql.class);
+            = LoggerFactory.getLogger(ProductRecordDtoDAOJdbc.class);
 
     /**
      * SQL script create record.
@@ -45,7 +45,7 @@ public class ProductRecordDAOJdbcMsql implements ProductRecordDAO {
      * Constructor.
      * @param namedParameterJdbcTemplate jdbc template.
      */
-    public ProductRecordDAOJdbcMsql(
+    public ProductRecordDAOJdbc(
             final NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.jdbcTemplate = namedParameterJdbcTemplate;
     }
